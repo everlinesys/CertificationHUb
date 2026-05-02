@@ -38,6 +38,7 @@ export default function Hero() {
           <Button 
             onClick={() => navigate("/category/tech")}
             className="w-full sm:w-auto px-8 py-4 bg-white text-black hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 group"
+            style={{ boxShadow: "0 4px 15px rgba(255, 255, 255, 0.2)" , color:"#000" }}  
           >
             Start Practice Exam
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

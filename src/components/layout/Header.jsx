@@ -2,12 +2,13 @@ import { Link } from "react-router-dom"
 
 export default function Header() {
   return (
-    <header className="bg-zinc-900 text-white border-b border-zinc-800 min-w-[full]">
+    <header className="bg-zinc-900 text-white border-b border-zinc-800 min-w-[100vw]">
       <div className=" mx-auto px-4 py-3 flex items-center justify-between">
 
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold">
-          🎓 CertifyPro
+        <Link to="/" className="text-xl font-semibold flex items-center gap-2">
+          <img src="/logo.png" alt="" className="h-18 w-auto" />
+          Guru & Guruji
         </Link>
 
         {/* Nav */}
