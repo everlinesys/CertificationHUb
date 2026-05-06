@@ -4,10 +4,10 @@ import Featured from "../components/home/Featured"
 
 export default function Home() {
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className=" text-white min-h-screen ">
       <Hero />
-      <Categories />
-      <Featured />
+      {/* <Categories />
+      <Featured /> */}
     </div>
   )
 }

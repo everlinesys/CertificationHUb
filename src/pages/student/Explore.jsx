@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
 
-export default function Categories() {
+export default function Export() {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ export default function Categories() {
         {categories.map(c => (
           <div
             key={c.id}
-            onClick={() => navigate(`/category/${c.id}`)}
+            onClick={() => navigate(`/dashboard/category/${c.id}`)}
             className="bg-zinc-900 p-4 rounded-lg cursor-pointer hover:bg-zinc-800"
           >
             <h2 className="font-semibold">{c.name}</h2>

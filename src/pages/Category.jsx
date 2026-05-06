@@ -1,88 +1,86 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { certifications, categories } from "../data/certifications";
-import { ChevronLeft, Clock, BarChart, BookOpen, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import api from "../api";
+import Card from "../components/ui/Card";
+import { Layout, PlayCircle } from "lucide-react";
 
 export default function Category() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // Find the current category metadata
-  const categoryInfo = categories.find((cat) => cat.id === id);
-  const filtered = certifications.filter((c) => c.category === id);
+  const [certs, setCerts] = useState([]);
+  const [category, setCategory] = useState(null);
+
+  useEffect(() => {
+    fetchData();
+  }, [id]);
+
+  const fetchData = async () => {
+    try {
+      const res = await api.get(`/certifications?categoryId=${id}`);
+      setCerts(res.data);
+
+      // get category name from first item (quick way)
+      if (res.data.length > 0) {
+        setCategory(res.data[0].category);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 pb-20">
-      {/* Header Section */}
-      <div className="bg-zinc-900/50 border-b border-zinc-800">
-        <div className="max-w-6xl mx-auto px-6 py-12">
-          <button 
-            onClick={() => navigate("/")}
-            className="flex items-center text-zinc-400 hover:text-white transition-colors mb-6 group"
+    <div className="px-6 py-16 max-w-7xl mx-auto text-white">
+      
+      {/* 🔥 Title */}
+      <h1 className="text-3xl font-bold mb-10">
+        {category?.name || "Category"}
+      </h1>
+
+      {/* ❌ Empty state */}
+      {certs.length === 0 && (
+        <p className="text-zinc-500">No certifications found.</p>
+      )}
+
+      {/* 📚 Certifications */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {certs.map((cert) => (
+          <div
+            key={cert.id}
+            onClick={() => navigate(`/exam/${cert.id}`)}
+            className="cursor-pointer"
           >
-            <ChevronLeft className="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" />
-            Back to Categories
-          </button>
-          
-          <h1 className="text-4xl font-bold mb-2">
-            {categoryInfo?.name || "Certifications"}
-          </h1>
-          <p className="text-zinc-400 max-w-xl">
-            {categoryInfo?.description || "Master new skills with our industry-standard certification exams."}
-          </p>
-        </div>
-      </div>
+            <Card className="bg-zinc-900 border border-zinc-800 p-5 hover:bg-zinc-800 transition">
 
-      {/* Grid Section */}
-      <main className="max-w-6xl mx-auto px-6 mt-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filtered.length > 0 ? (
-            filtered.map((cert) => (
-              <div
-                key={cert.id}
-                onClick={() => navigate(`/exam/${cert.id}`)}
-                className="group p-6 bg-zinc-900 border border-zinc-800 rounded-xl cursor-pointer 
-                           hover:bg-zinc-800/40 hover:border-zinc-600 transition-all duration-200"
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <div className="space-y-1">
-                    <h2 className="text-xl font-bold group-hover:text-indigo-400 transition-colors">
-                      {cert.title}
-                    </h2>
-                    <div className="flex gap-4 text-xs text-zinc-500">
-                      <span className="flex items-center gap-1">
-                        <BookOpen className="w-3 h-3" />
-                        {cert.questions.length} Questions
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <BarChart className="w-3 h-3" />
-                        {cert.difficulty || "General"}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        ~{cert.questions.length * 2} mins
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-2 bg-zinc-800 rounded-lg group-hover:bg-indigo-600/20 group-hover:text-indigo-400 transition-all">
-                    <ArrowRight className="w-5 h-5" />
-                  </div>
+              {/* Title */}
+              <h3 className="text-lg font-semibold mb-2">
+                {cert.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-sm text-zinc-400 line-clamp-2 mb-3">
+                {cert.description}
+              </p>
+
+              {/* Info */}
+              <div className="flex items-center justify-between text-sm text-zinc-500">
+                <div className="flex items-center gap-1">
+                  <Layout className="w-4 h-4" />
+                  <span>
+                    {cert._count?.questions ?? cert.questions?.length ?? 0} Questions
+                  </span>
                 </div>
 
-                <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
-                  <div className="bg-zinc-700 w-full h-full" />
-                </div>
-                <p className="text-[10px] uppercase tracking-widest text-zinc-600 mt-2 font-semibold">
-                  Not Started
-                </p>
+                <span className="text-indigo-400 flex items-center gap-1">
+                  <PlayCircle className="w-4 h-4" />
+                  Start
+                </span>
               </div>
-            ))
-          ) : (
-            <div className="col-span-full py-20 text-center border-2 border-dashed border-zinc-800 rounded-3xl">
-              <p className="text-zinc-500">No certifications found in this category yet.</p>
-            </div>
-          )}
-        </div>
-      </main>
+
+            </Card>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

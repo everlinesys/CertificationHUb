@@ -44,7 +44,7 @@ export default function Featured() {
               {/* Category Badge */}
               <div className="flex justify-between items-start mb-6">
                 <span className="px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                  {cert.category || "General"}
+                 {cert.category?.name || "General"}
                 </span>
                 <div className="flex items-center gap-1 text-zinc-500 text-xs">
                   <Zap className="w-3 h-3 fill-current" />

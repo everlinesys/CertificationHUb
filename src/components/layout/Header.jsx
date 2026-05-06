@@ -1,38 +1,63 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
   return (
-    <header className="bg-zinc-900 text-white border-b border-zinc-800 min-w-[100vw]">
-      <div className=" mx-auto px-4 py-3 flex items-center justify-between">
+    <header className="top-0 left-0 w-full z-50 bg-transparent">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-center">
 
         {/* Logo */}
-        <Link to="/" className="text-xl font-semibold flex items-center gap-2">
-          <img src="/logo.png" alt="" className="h-18 w-auto" />
-          Guru & Guruji
+        <Link to="/" className="flex items-center gap-2 hover:opacity-80">
+          <span className="text-sm font-medium text-zinc-400 hover:text-white">
+            Guru and Guruji
+          </span>
+          <img src="/logo.png" alt="Logo" className="h-8 md:h-10" />
         </Link>
 
-        {/* Nav */}
-        <nav className="hidden md:flex gap-6 text-sm">
-          <Link to="/" className="hover:text-blue-400">Home</Link>
-          <Link to="/" className="hover:text-blue-400">Certifications</Link>
-          <Link to="/dashboard" className="hover:text-blue-400">Dashboard</Link>
-        </nav>
-
         {/* Actions */}
-        <div className="flex gap-3">
-          <Link
-            to="/login"
-            className="px-4 py-1 border border-zinc-700 rounded hover:bg-zinc-800"
-          >
-            Login
-          </Link>
+        <div className="flex items-center gap-6">
 
-          <button className="px-4 py-1 bg-blue-600 rounded hover:bg-blue-500">
-            Subscribe
-          </button>
+          {/* 🔐 NOT LOGGED IN */}
+          {!token && (
+            <Link
+              to="/login"
+              className="text-sm font-medium text-zinc-400 hover:text-white"
+            >
+              Sign In
+            </Link>
+          )}
+
+          {/* ✅ LOGGED IN */}
+          {token && (
+            <>
+              <Link
+                to="/dashboard"
+                className="text-sm text-zinc-400 hover:text-white"
+              >
+                Dashboard
+              </Link>
+
+              <button
+                onClick={logout}
+                className="text-sm text-red-400 hover:text-red-300"
+              >
+                Logout
+              </button>
+            </>
+          )}
+
         </div>
-
       </div>
     </header>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -55,7 +55,26 @@
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  font-weight: 100;
+  font-family: "Saira", sans-serif;
+
   font-style: normal;
+}
+header,
+main,
+footer {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  position: relative;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
