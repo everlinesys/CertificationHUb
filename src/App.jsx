@@ -25,6 +25,7 @@ import StudentLayout from "./pages/student/Studentlayout"
 import MyCertificates from "./pages/student/MyCertificates"
 import Explore from "./pages/student/Explore"
 import CertificatePage from "./pages/Certificate"
+import About from "./pages/About"
 
 export default function App() {
   return (
@@ -43,6 +44,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/certificate/:id" element={<CertificatePage />} />
+        <Route path="/about" element={<About />} />
         {/* 🔐 STUDENT ROUTES */}
         <Route
           path="/dashboard"
