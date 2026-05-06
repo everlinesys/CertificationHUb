@@ -76,7 +76,8 @@ export default function ResultGate() {
 
     const saveAttempt = async () => {
       try {
-        await fetch("http://localhost:5010/api/attempt/submit", {
+         
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}/attempt/submit`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -102,7 +103,7 @@ export default function ResultGate() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:5010/api/payment/create-order", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/payment/create-order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -133,7 +134,7 @@ export default function ResultGate() {
         order_id: data.orderId,
 
         handler: async (response) => {
-          await fetch("http://localhost:5010/api/payment/verify", {
+          await fetch(`${import.meta.env.VITE_BACKEND_URL}/payment/verify`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
