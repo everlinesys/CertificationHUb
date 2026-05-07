@@ -304,7 +304,7 @@ export default function Exam() {
                     </p>
 
                     <p className="text-white/50 text-xs">
-                      Guru and Guruji Certification
+                      LearnBridge Certification
                     </p>
                   </div>
 

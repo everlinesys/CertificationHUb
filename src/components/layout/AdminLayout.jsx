@@ -147,7 +147,7 @@ export default function AdminLayout() {
 
               <div>
                 <h1 className="text-xl font-bold">
-                  Guru and Guruji
+                  LearnBridge
                 </h1>
 
                 <p className="text-white/50 text-sm">
@@ -273,7 +273,7 @@ export default function AdminLayout() {
               </h1>
 
               <p className="text-white/50 text-xs">
-                Guru & Guruji
+                LearnBridge
               </p>
             </div>
           </div>
@@ -370,7 +370,7 @@ export default function AdminLayout() {
 
                 <div>
                   <h1 className="text-xl font-bold">
-                    Guru & Guruji
+                    LearnBridge
                   </h1>
 
                   <p className="text-white/50 text-sm">

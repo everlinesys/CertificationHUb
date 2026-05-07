@@ -22,7 +22,7 @@ export default function Footer() {
 
             <div>
               <h3 className="text-white font-semibold tracking-wide">
-                Guru and Guruji
+                LearnBridge
               </h3>
 
               <p className="text-sm text-white/50">

@@ -103,7 +103,7 @@ export default function About() {
                         </h1>
 
                         <p className="mt-6 text-[#A8BED1] text-lg md:text-xl leading-relaxed max-w-2xl">
-                            Guru & Guruji is an AI-powered certification platform helping learners validate real-world skills through modern, industry-focused assessments.
+                            LearnBridge is an AI-powered certification platform helping learners validate real-world skills through modern, industry-focused assessments.
                         </p>
 
                         {/* CTA */}
@@ -247,7 +247,7 @@ export default function About() {
                                         </p>
 
                                         <p className="text-white/50 text-xs">
-                                            Guru & Guruji
+                                            LearnBridge
                                         </p>
                                     </div>
 
@@ -348,7 +348,7 @@ export default function About() {
               mb-5
             ">
                             <ShieldCheck className="w-4 h-4 text-[#11B5FF]" />
-                            Why Guru & Guruji
+                            Why LearnBridge
                         </div>
 
                         <h2 className="text-4xl md:text-6xl font-bold">

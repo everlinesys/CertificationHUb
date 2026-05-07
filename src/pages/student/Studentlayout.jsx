@@ -136,7 +136,7 @@ export default function StudentLayout() {
 
               <div>
                 <h1 className="text-xl font-bold">
-                  LearnTube.ai
+                  LearnBridge
                 </h1>
 
                 <p className="text-white/50 text-sm">
@@ -279,7 +279,7 @@ export default function StudentLayout() {
               </h1>
 
               <p className="text-white/50 text-xs">
-                LearnTube.ai
+                LearnBridge
               </p>
             </div>
           </div>
@@ -382,7 +382,7 @@ export default function StudentLayout() {
 
                 <div>
                   <h1 className="text-xl font-bold">
-                    LearnTube.ai
+                    LearnBridge
                   </h1>
 
                   <p className="text-white/50 text-sm">

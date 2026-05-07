@@ -30,7 +30,7 @@ export default function Header() {
             />
 
             <span className="text-sm md:text-base font-semibold tracking-wide text-white">
-              Guru and Guruji
+              LearnBridge
             </span>
           </Link>
 
