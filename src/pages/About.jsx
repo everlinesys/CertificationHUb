@@ -327,38 +327,40 @@ export default function About() {
 
             {/* FEATURES */}
             <div className="px-4 md:px-8 pb-24">
-
                 <div className="max-w-7xl mx-auto">
 
                     {/* Heading */}
                     <div className="text-center mb-16">
 
-                        <div className="
-              inline-flex
-              items-center
-              gap-2
-              px-4
-              py-2
-              rounded-full
-              bg-white/5
-              border
-              border-white/10
-              text-white/70
-              text-sm
-              mb-5
-            ">
-                            <ShieldCheck className="w-4 h-4 text-[#11B5FF]" />
+                        <div
+                            className="
+          inline-flex
+          items-center
+          gap-2
+          px-4
+          py-2
+          rounded-full
+          bg-emerald-400/10
+          border
+          border-emerald-300/20
+          text-emerald-100
+          text-sm
+          mb-5
+          backdrop-blur-xl
+        "
+                        >
+                            <ShieldCheck className="w-4 h-4 text-emerald-400" />
                             Why LearnBridge
                         </div>
 
-                        <h2 className="text-4xl md:text-6xl font-bold">
+                        <h2 className="text-4xl md:text-6xl font-bold text-white">
                             Built For The
-                            <span className="text-[#11B5FF]">
+                            <span className="text-emerald-400">
                                 {" "}Modern Workforce
                             </span>
                         </h2>
 
-                        <p className="text-[#A8BED1] text-lg mt-5 max-w-3xl mx-auto">
+                        <p className="text-emerald-50/70 text-lg mt-5 max-w-3xl mx-auto">
                             We combine AI, practical assessments, and modern certification design to create a better way to validate skills.
                         </p>
                     </div>
@@ -373,39 +375,44 @@ export default function About() {
                                 <div
                                     key={f.title}
                                     className="
-                    group
-                    rounded-3xl
-                    bg-white/[0.04]
-                    border
-                    border-white/10
-                    p-7
-                    hover:bg-white/[0.06]
-                    transition-all
-                    duration-300
-                    hover:scale-[1.02]
-                  "
+              group
+              rounded-3xl
+              bg-emerald-400/[0.07]
+              border
+              border-emerald-300/10
+              p-7
+              backdrop-blur-xl
+              hover:bg-emerald-400/[0.11]
+              hover:border-emerald-300/30
+              transition-all
+              duration-300
+              hover:scale-[1.02]
+              hover:shadow-[0_0_40px_rgba(16,185,129,0.15)]
+            "
                                 >
 
-                                    <div className="
-                    w-16
-                    h-16
-                    rounded-2xl
-                    bg-[#11B5FF]/10
-                    border
-                    border-[#11B5FF]/20
-                    flex
-                    items-center
-                    justify-center
-                    mb-6
-                  ">
-                                        <Icon className="w-8 h-8 text-[#11B5FF]" />
+                                    <div
+                                        className="
+                w-16
+                h-16
+                rounded-2xl
+                bg-emerald-400/15
+                border
+                border-emerald-300/20
+                flex
+                items-center
+                justify-center
+                mb-6
+              "
+                                    >
+                                        <Icon className="w-8 h-8 text-emerald-400" />
                                     </div>
 
-                                    <h3 className="text-2xl font-bold mb-3">
+                                    <h3 className="text-2xl font-bold mb-3 text-white">
                                         {f.title}
                                     </h3>
 
-                                    <p className="text-[#A8BED1] leading-relaxed">
+                                    <p className="text-emerald-50/70 leading-relaxed">
                                         {f.desc}
                                     </p>
                                 </div>
