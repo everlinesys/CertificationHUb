@@ -78,16 +78,23 @@ footer {
     transform: translateY(0) scale(1);
   }
 }
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.2s linear infinite;
+}
+
 @keyframes arrowMove {
-  0% {
-    transform: translateX(0px);
+  0%, 100% {
+    transform: translateX(0);
   }
 
   50% {
     transform: translateX(4px);
-  }
-
-  100% {
-    transform: translateX(0px);
   }
 }

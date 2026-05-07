@@ -16,7 +16,7 @@ export default function Header() {
       <div className=" max-w-7xl mx-auto px-6 py-6 flex items-center justify-center  bg-transparent">
         
         {/* Center Container */}
-        <div className="flex items-center gap-10 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md px-6 py-3 shadow-[0_8px_40px_rgba(0,0,0,0.15)]">
+        <div className="flex items-center gap-10 rounded-full border border-white/10 bg-white/[0.03]  px-6 py-3 shadow-[0_8px_40px_rgba(0,0,0,0.15)]">
           
           {/* Logo */}
           <Link
@@ -44,7 +44,7 @@ export default function Header() {
               <>
                 <Link
                   to="/about"
-                  className="text-sm text-white/60 hover:text-white transition-colors"
+                  className="hidden md:flex text-sm text-white/60 hover:text-white transition-colors"
                 >
                   About
                 </Link>
