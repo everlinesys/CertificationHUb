@@ -104,9 +104,13 @@ export default function Exam() {
     return (
       <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white px-4 py-6">
 
-
-
-
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-white/60 hover:text-white mb-6"
+        >
+          <ChevronLeft className="w-5 h-5" />
+          Back
+        </button>
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
 
           {/* LEFT */}
