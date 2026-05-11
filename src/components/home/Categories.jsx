@@ -51,7 +51,23 @@ export default function Categories() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="mb-8 text-center md:text-left"
+        > <motion.button
+          whileHover={{ x: -4 }}
+          whileTap={{ scale: 0.96 }}
+          onClick={() => navigate(-1)}
+          className="
+              flex
+              items-center
+              gap-2
+              text-white/70
+              hover:text-white
+              transition-colors
+              mb-6
+            "
         >
+            <ChevronLeft className="w-5 h-5" />
+            Back
+          </motion.button>
           <h1 className="text-4xl md:text-6xl font-bold leading-tight">
             What <span className="text-[#11B5FF]">Skill</span> Do You Want To
             Get Certified In?

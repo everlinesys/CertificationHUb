@@ -20,7 +20,7 @@ export default function Exam() {
   const [cert, setCert] = useState(null)
   const [started, setStarted] = useState(false)
 
-  const [candidateName, setCandidateName] = useState("")
+
   const [loading, setLoading] = useState(false)
 
   const [index, setIndex] = useState(0)
@@ -28,7 +28,27 @@ export default function Exam() {
 
   const tickRef = useRef(null)
   const clickRef = useRef(null)
+  const [candidateName, setCandidateName] = useState("")
+  const [loggedInUser, setLoggedInUser] = useState(null)
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user")
+
+    if (storedUser) {
+      try {
+        const parsed = JSON.parse(storedUser)
+
+        setLoggedInUser(parsed)
+
+        if (parsed?.name) {
+          setCandidateName(parsed.name)
+        }
+
+      } catch (err) {
+        console.error(err)
+      }
+    }
+  }, [])
   const [muted, setMuted] = useState(
     localStorage.getItem("examMuted") === "true"
   )
@@ -62,7 +82,7 @@ export default function Exam() {
     if (newState) {
       tickRef.current?.pause()
     } else {
-      tickRef.current?.play().catch(() => {})
+      tickRef.current?.play().catch(() => { })
     }
   }
 
@@ -82,7 +102,7 @@ export default function Exam() {
       setStarted(true)
 
       if (!muted) {
-        tickRef.current?.play().catch(() => {})
+        tickRef.current?.play().catch(() => { })
       }
     } catch (err) {
       console.error(err)
@@ -104,8 +124,8 @@ export default function Exam() {
     return (
       <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white px-4 py-6">
 
-       
-       
+
+
 
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
 
@@ -156,7 +176,9 @@ export default function Exam() {
 
               <div className="px-5 py-4 rounded-2xl bg-white/5 border border-white/10">
                 <p className="text-2xl font-bold">
-                  {cert.passMark}%
+                  {cert.questions?.length
+                    ? Math.round((cert.passMark / cert.questions.length) * 100)
+                    : 60}%
                 </p>
 
                 <p className="text-white/50 text-sm">
@@ -186,20 +208,23 @@ export default function Exam() {
                 value={candidateName}
                 onChange={(e) => setCandidateName(e.target.value)}
                 placeholder="Enter your full name"
+                disabled={!!loggedInUser}
                 className="
-                  w-full
-                  h-14
-                  rounded-2xl
-                  bg-[#21466D]
-                  border
-                  border-[#3D6D9B]
-                  px-5
-                  text-white
-                  placeholder:text-[#7E9AB2]
-                  outline-none
-                  focus:ring-2
-                  focus:ring-[#11B5FF]/30
-                "
+    w-full
+    h-14
+    rounded-2xl
+    bg-[#21466D]
+    border
+    border-[#3D6D9B]
+    px-5
+    text-white
+    placeholder:text-[#7E9AB2]
+    outline-none
+    focus:ring-2
+    focus:ring-[#11B5FF]/30
+    disabled:opacity-70
+    disabled:cursor-not-allowed
+  "
               />
 
               <button
@@ -355,7 +380,7 @@ export default function Exam() {
 
     if (!muted) {
       clickRef.current.currentTime = 0
-      clickRef.current.play().catch(() => {})
+      clickRef.current.play().catch(() => { })
     }
 
     setTimeout(() => {
