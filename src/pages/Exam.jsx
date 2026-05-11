@@ -20,7 +20,7 @@ export default function Exam() {
   const [cert, setCert] = useState(null)
   const [started, setStarted] = useState(false)
 
-
+  const [candidateName, setCandidateName] = useState("")
   const [loading, setLoading] = useState(false)
 
   const [index, setIndex] = useState(0)
@@ -28,27 +28,7 @@ export default function Exam() {
 
   const tickRef = useRef(null)
   const clickRef = useRef(null)
-  const [candidateName, setCandidateName] = useState("")
-  const [loggedInUser, setLoggedInUser] = useState(null)
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user")
-
-    if (storedUser) {
-      try {
-        const parsed = JSON.parse(storedUser)
-
-        setLoggedInUser(parsed)
-
-        if (parsed?.name) {
-          setCandidateName(parsed.name)
-        }
-
-      } catch (err) {
-        console.error(err)
-      }
-    }
-  }, [])
   const [muted, setMuted] = useState(
     localStorage.getItem("examMuted") === "true"
   )
@@ -208,23 +188,20 @@ export default function Exam() {
                 value={candidateName}
                 onChange={(e) => setCandidateName(e.target.value)}
                 placeholder="Enter your full name"
-                disabled={!!loggedInUser}
                 className="
-    w-full
-    h-14
-    rounded-2xl
-    bg-[#21466D]
-    border
-    border-[#3D6D9B]
-    px-5
-    text-white
-    placeholder:text-[#7E9AB2]
-    outline-none
-    focus:ring-2
-    focus:ring-[#11B5FF]/30
-    disabled:opacity-70
-    disabled:cursor-not-allowed
-  "
+                  w-full
+                  h-14
+                  rounded-2xl
+                  bg-[#21466D]
+                  border
+                  border-[#3D6D9B]
+                  px-5
+                  text-white
+                  placeholder:text-[#7E9AB2]
+                  outline-none
+                  focus:ring-2
+                  focus:ring-[#11B5FF]/30
+                "
               />
 
               <button
