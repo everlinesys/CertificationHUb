@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../api";
 
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+
 export default function AddQuestions() {
   const { id } = useParams();
 
@@ -13,33 +16,29 @@ export default function AddQuestions() {
   const [correctAnswer, setCorrectAnswer] = useState(0);
 
   const [questionsList, setQuestionsList] = useState([]);
-  const [editingId, setEditingId] = useState(null); // 🔥 edit mode
+  const [editingId, setEditingId] = useState(null);
 
-  // 📚 Load certifications
   useEffect(() => {
-    api.get("/certifications").then(res => {
+    api.get("/certifications").then((res) => {
       setCertifications(res.data);
     });
   }, []);
 
-  // 📚 Load questions
   useEffect(() => {
     if (!selectedCert) return;
 
     api.get(`/questions/${selectedCert}`)
-      .then(res => setQuestionsList(res.data))
+      .then((res) => setQuestionsList(res.data))
       .catch(() => setQuestionsList([]));
   }, [selectedCert]);
 
-  // 🔄 Reload helper
   const reload = async () => {
     const res = await api.get(`/questions/${selectedCert}`);
     setQuestionsList(res.data);
   };
 
-  // 🚀 Add / Update
   const submit = async () => {
-    if (!question || options.some(o => !o)) {
+    if (!question || options.some((o) => !o)) {
       return alert("Fill all fields");
     }
 
@@ -47,7 +46,7 @@ export default function AddQuestions() {
       await api.put(`/questions/${editingId}`, {
         question,
         options,
-        correctAnswer
+        correctAnswer,
       });
 
       alert("Updated ✅");
@@ -56,7 +55,7 @@ export default function AddQuestions() {
         certificationId: selectedCert,
         question,
         options,
-        correctAnswer
+        correctAnswer,
       });
 
       alert("Added ✅");
@@ -66,7 +65,6 @@ export default function AddQuestions() {
     reload();
   };
 
-  // ✏️ Edit
   const editQuestion = (q) => {
     setEditingId(q.id);
     setQuestion(q.question);
@@ -74,7 +72,6 @@ export default function AddQuestions() {
     setCorrectAnswer(q.correctAnswer);
   };
 
-  // 🗑 Delete
   const deleteQuestion = async (id) => {
     const confirmDelete = window.confirm(
       "Delete this question permanently? ⚠️"
@@ -86,12 +83,93 @@ export default function AddQuestions() {
     reload();
   };
 
-  // 🔄 Reset
   const resetForm = () => {
     setEditingId(null);
     setQuestion("");
     setOptions(["", "", "", ""]);
     setCorrectAnswer(0);
+  };
+
+  // =========================
+  // DOWNLOAD TEMPLATE
+  // =========================
+  const downloadTemplate = () => {
+    const data = [
+      {
+        question: "",
+        option1: "",
+        option2: "",
+        option3: "",
+        option4: "",
+        correctAnswer: "",
+      },
+    ];
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Questions");
+
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+
+    const fileData = new Blob([excelBuffer], {
+      type:
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+
+    saveAs(fileData, "questions_template.xlsx");
+  };
+
+  // =========================
+  // IMPORT EXCEL
+  // =========================
+  const importExcel = async (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = async (evt) => {
+      const data = evt.target.result;
+
+      const workbook = XLSX.read(data, {
+        type: "binary",
+      });
+
+      const sheetName = workbook.SheetNames[0];
+
+      const worksheet = workbook.Sheets[sheetName];
+
+      const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+      try {
+        for (const row of jsonData) {
+          await api.post("/questions", {
+            certificationId: selectedCert,
+            question: row.question,
+            options: [
+              row.option1,
+              row.option2,
+              row.option3,
+              row.option4,
+            ],
+            correctAnswer: Number(row.correctAnswer)-1,
+          });
+        }
+
+        alert("Questions Imported ✅");
+        reload();
+      } catch (err) {
+        console.error(err);
+        alert("Import Failed ❌");
+      }
+    };
+
+    reader.readAsBinaryString(file);
   };
 
   return (
@@ -100,19 +178,40 @@ export default function AddQuestions() {
         {editingId ? "Edit Question" : "Add Questions"}
       </h1>
 
-      {/* 🔽 Certification */}
+      {/* Certification */}
       <select
         value={selectedCert}
         onChange={(e) => setSelectedCert(e.target.value)}
         className="w-full p-2 mb-4 bg-zinc-800 rounded"
       >
         <option value="">Select Certification</option>
-        {certifications.map(c => (
+
+        {certifications.map((c) => (
           <option key={c.id} value={c.id}>
             {c.title}
           </option>
         ))}
       </select>
+
+      {/* Excel Actions */}
+      <div className="flex gap-3 mb-6">
+        <button
+          onClick={downloadTemplate}
+          className="bg-green-600 px-4 py-2 rounded"
+        >
+          Download Excel Template
+        </button>
+
+        <label className="bg-blue-600 px-4 py-2 rounded cursor-pointer">
+          Import Excel
+          <input
+            type="file"
+            accept=".xlsx,.xls"
+            onChange={importExcel}
+            hidden
+          />
+        </label>
+      </div>
 
       {/* Question */}
       <input
@@ -163,13 +262,15 @@ export default function AddQuestions() {
         )}
       </div>
 
-      {/* 📚 Questions */}
+      {/* Questions */}
       <div className="mt-8">
         <h2 className="text-lg font-semibold mb-3">Questions</h2>
 
         {questionsList.map((q, i) => (
           <div key={q.id} className="bg-zinc-900 p-3 rounded mb-2">
-            <p className="font-semibold">{i + 1}. {q.question}</p>
+            <p className="font-semibold">
+              {i + 1}. {q.question}
+            </p>
 
             <ul className="text-sm text-zinc-400 mb-2">
               {q.options.map((opt, idx) => (
