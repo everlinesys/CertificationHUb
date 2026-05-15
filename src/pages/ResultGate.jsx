@@ -171,7 +171,7 @@ export default function ResultGate() {
   }
 
   return (
-    <section className="min-h-screen overflow-hidden bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white relative px-4 py-8 md:px-8">
+    <section className="min-h-screen overflow-hidden bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white relative px-4 py-8 md:px-16">
 
       {/* Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-cyan-500/10 blur-[140px] rounded-full" />
@@ -202,7 +202,7 @@ export default function ResultGate() {
             Certification Assessment Complete
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-black leading-[1.05]">
+          <h1 className="text-5xl md:text-6xl font-bold leading-[1.05]">
 
             {passed ? (
               <>
@@ -393,224 +393,195 @@ export default function ResultGate() {
         </div>
 
         {/* RIGHT CARD */}
-        <div className="relative">
+        {/* RIGHT CERTIFICATE */}
+        <div className="relative flex justify-center">
 
           <div className="
-            relative
-            overflow-hidden
-            rounded-[36px]
-            border
-            border-[#D6B86B]
-            bg-[#07131E]
-            shadow-2xl
-          ">
+    relative
+    w-full
+    max-w-[700px]
+    rounded-[30px]
+    overflow-hidden
+    shadow-[0_30px_100px_rgba(0,0,0,0.45)]
+    border
+    border-[#D4AF37]/40
+    bg-white
+  ">
 
-            {/* Pattern */}
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.12)_1px,_transparent_1px)] bg-[size:10px_10px]" />
+            {/* Certificate Image */}
+            <img
+              src="/template.png"
+              alt="certificate"
+              className="w-full object-contain"
+            />
 
-            <div className="relative z-10 p-8 md:p-10">
+            {/* Overlay */}
+            <div className="absolute inset-0 ">
 
-              {/* Trophy */}
-              <div className="flex justify-center mb-8">
+              {/* Candidate Name */}
+              <div className="
+        absolute
+        top-[38%]
+        left-1/2
+        -translate-x-1/2
+        w-[70%]
+        text-center
+      ">
+                <h2
+                  className="
+            text-[#1B1B1B]
+            text-2xl
+            md:text-4xl
+            font-semibold
+            italic
+            tracking-wide
+          "
+                  style={{
+                    fontFamily: "'Times New Roman', serif",
+                  }}
+                >
+                  {candidateName || "Candidate Name"}
+                </h2>
+              </div>
 
+              {/* Course */}
+              <div className="
+        absolute
+        top-[48%]
+        left-1/2
+        -translate-x-1/2
+        w-[75%]
+        text-center
+      ">
+                <p className="
+          text-[#3A2A14]
+          text-sm
+          md:text-xl
+          font-medium
+        ">
+                  {cert.title}
+                </p>
+              </div>
+
+              {/* Grade */}
+              <div className="
+        absolute
+        top-[59.5%]
+        left-1/2
+        -translate-x-1/2
+        text-center
+      ">
                 <div className={`
-                  w-20
-                  h-20
-                  rounded-full
-                  flex
-                  items-center
-                  justify-center
-                  border
-                  shadow-2xl
-                  ${passed
-                    ? "bg-[#8CC63F]/10 border-[#8CC63F]/20"
-                    : "bg-red-500/10 border-red-500/20"
+          px-6
+          py-2
+          rounded-full
+          border-2
+          text-lg
+          md:text-2xl
+          font-black
+          tracking-[0.15em]
+          shadow-lg
+          ${passed
+                    ? "bg-green-100 border-green-700 text-green-800"
+                    : "bg-red-100 border-red-700 text-red-700"
                   }
-                `}>
-
-                  {passed ? (
-                    <Trophy className="w-10 h-10 text-[#E9D08A]" />
-                  ) : (
-                    <XCircle className="w-10 h-10 text-red-400" />
-                  )}
+        `}>
+                  {passed ? "PASS" : "FAIL"}
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="text-center">
+              {/* Student ID */}
+              <div className="
+        absolute
+        left-[18%]
+        top-[71%]
+        text-[#2B2B2B]
+        text-[10px]
+        md:text-sm
+      ">
+                ID-{cert.id?.slice(0, 8)}
+              </div>
 
-                <p className="text-[#E9D08A] text-5xl font-serif italic">
-                  {passed ? "Passed" : "Result"}
+              {/* Certificate Number */}
+              <div className="
+        absolute
+        left-[18%]
+        top-[74%]
+        text-[#2B2B2B]
+        text-[10px]
+        md:text-sm
+      ">
+                CERT-{Date.now().toString().slice(-6)}
+              </div>
+
+              {/* Date */}
+              <div className="
+        absolute
+        left-[23%]
+        top-[77%]
+        text-[#2B2B2B]
+        text-[10px]
+        md:text-sm
+      ">
+                {new Date().toLocaleDateString()}
+              </div>
+
+              {/* Score Badge */}
+              <div className="
+        absolute
+        right-[10%]
+        top-[60%]
+        w-24
+        h-24
+        md:w-32
+        md:h-32
+        rounded-full
+        border-[6px]
+        border-[#B7791F]
+        bg-gradient-to-br
+        from-[#F8E7B5]
+        to-[#D39B3D]
+        flex
+        flex-col
+        items-center
+        justify-center
+        shadow-2xl
+      ">
+                <p className="text-[10px] md:text-xs font-bold text-[#5C2D00]">
+                  SCORE
                 </p>
 
-                <p className="text-white/50 mt-5 text-sm">
-                  Candidate
-                </p>
-
-                <h2 className="text-4xl font-semibold text-white mt-3">
-                  {candidateName || "Your Name"}
-                </h2>
-
-                <p className="text-white/60 mt-5">
-                  Assessment
-                </p>
-
-                <h3 className="text-[#E9D08A] text-2xl mt-2 font-medium">
-                  {cert.title}
+                <h3 className="text-xl md:text-3xl font-black text-[#5C2D00] leading-none">
+                  {Math.round(
+                    (correct / cert.questions.length) * 100
+                  )}%
                 </h3>
               </div>
 
-              {/* Locked Result */}
+              {/* Watermark Result */}
               <div className="
-                relative
-                mt-10
-                rounded-3xl
-                border
-                border-white/10
-                bg-white/5
-                overflow-hidden
-              ">
-
-                {/* Blur Layer */}
-                {!user && (
-                  <div className="
-                    absolute
-                    inset-0
-                    z-20
-                    bg-[#07131E]/80
-                    backdrop-blur-sm
-                    flex
-                    flex-col
-                    items-center
-                    justify-center
-                  ">
-                    <div className="
-                      w-16
-                      h-16
-                      rounded-full
-                      bg-white/10
-                      flex
-                      items-center
-                      justify-center
-                      mb-4
-                    ">
-                      <Lock className="w-8 h-8 text-[#11B5FF]" />
-                    </div>
-
-                    <p className="font-semibold text-lg">
-                      Result Locked
-                    </p>
-
-                    <p className="text-white/50 text-sm mt-2">
-                      Sign in to continue
-                    </p>
-                  </div>
-                )}
-
-                <div className="p-6">
-
-                  <div className="flex items-center justify-between py-3 border-b border-white/10">
-                    <span className="text-white/50">
-                      Status
-                    </span>
-
-                    <span className={`
-                      font-bold
-                      ${passed
-                        ? "text-[#8CC63F]"
-                        : "text-red-400"
-                      }
-                    `}>
-                      {passed ? "PASSED" : "FAILED"}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between py-3 border-b border-white/10">
-                    <span className="text-white/50">
-                      Score
-                    </span>
-
-                    <span className="font-bold">
-                      {correct}/{cert.questions.length}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between py-3">
-                    <span className="text-white/50">
-                      Pass Mark
-                    </span>
-
-                    <span className="font-bold">
-                      {cert.passMark}%
-                    </span>
-                  </div>
+        absolute
+        inset-0
+        flex
+        items-center
+        justify-center
+        pointer-events-none
+      ">
+                <div className={`
+          rotate-[-20deg]
+          text-[80px]
+          md:text-[140px]
+          font-black
+          opacity-[0.06]
+          tracking-[0.2em]
+          ${passed
+                    ? "text-green-700"
+                    : "text-red-700"
+                  }
+        `}>
+                  {passed ? "CERTIFIED" : "FAILED"}
                 </div>
               </div>
-
-              {/* Bottom */}
-              <div className="
-                mt-8
-                rounded-2xl
-                bg-white/5
-                border
-                border-white/10
-                p-5
-              ">
-                <p className="text-white/80 italic text-sm leading-relaxed">
-                  {passed
-                    ? "“Your certification is ready to be unlocked and shared professionally.”"
-                    : "“Keep learning and attempt the certification again to unlock your verified credential.”"}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Floating Badge */}
-          <div className="
-            hidden
-            md:flex
-            absolute
-            -bottom-6
-            -left-6
-            rounded-3xl
-            bg-[#0D3454]
-            border
-            border-white/10
-            px-6
-            py-4
-            shadow-2xl
-            items-center
-            gap-4
-          ">
-
-            <div className={`
-              w-14
-              h-14
-              rounded-2xl
-              flex
-              items-center
-              justify-center
-              ${passed
-                ? "bg-[#8CC63F]/10"
-                : "bg-red-500/10"
-              }
-            `}>
-
-              {passed ? (
-                <CheckCircle2 className="w-7 h-7 text-[#8CC63F]" />
-              ) : (
-                <XCircle className="w-7 h-7 text-red-400" />
-              )}
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold">
-                {passed ? "Certified" : "Attempted"}
-              </h3>
-
-              <p className="text-white/50 text-sm">
-                AI Verified Assessment
-              </p>
             </div>
           </div>
         </div>

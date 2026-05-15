@@ -14,7 +14,7 @@ export default function AddQuestions() {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState(0);
-
+  const [explanation, setExplanation] = useState("");
   const [questionsList, setQuestionsList] = useState([]);
   const [editingId, setEditingId] = useState(null);
 
@@ -47,6 +47,7 @@ export default function AddQuestions() {
         question,
         options,
         correctAnswer,
+        explanation,
       });
 
       alert("Updated ✅");
@@ -56,6 +57,7 @@ export default function AddQuestions() {
         question,
         options,
         correctAnswer,
+        explanation,
       });
 
       alert("Added ✅");
@@ -70,6 +72,7 @@ export default function AddQuestions() {
     setQuestion(q.question);
     setOptions(q.options);
     setCorrectAnswer(q.correctAnswer);
+    setExplanation(q.explanation || "");
   };
 
   const deleteQuestion = async (id) => {
@@ -88,6 +91,7 @@ export default function AddQuestions() {
     setQuestion("");
     setOptions(["", "", "", ""]);
     setCorrectAnswer(0);
+    setExplanation("");
   };
 
   // =========================
@@ -102,6 +106,7 @@ export default function AddQuestions() {
         option3: "",
         option4: "",
         correctAnswer: "",
+        explanation: "",
       },
     ];
 
@@ -157,7 +162,8 @@ export default function AddQuestions() {
               row.option3,
               row.option4,
             ],
-            correctAnswer: Number(row.correctAnswer)-1,
+            correctAnswer: Number(row.correctAnswer) - 1,
+            explanation: row.explanation || "",
           });
         }
 
@@ -242,7 +248,12 @@ export default function AddQuestions() {
           />
         </div>
       ))}
-
+      <textarea
+        value={explanation}
+        placeholder="Explanation/Theory (Optional)"
+        className="w-full p-2 mt-3 bg-zinc-800 rounded min-h-[100px]"
+        onChange={(e) => setExplanation(e.target.value)}
+      />
       {/* Buttons */}
       <div className="flex gap-2 mt-4">
         <button
@@ -279,7 +290,12 @@ export default function AddQuestions() {
                 </li>
               ))}
             </ul>
-
+            {q.explanation && (
+              <div className="mt-2 text-sm text-blue-300">
+                <span className="font-semibold">Explanation:</span>{" "}
+                {q.explanation}
+              </div>
+            )}
             <div className="flex gap-3 text-sm">
               <button
                 onClick={() => editQuestion(q)}

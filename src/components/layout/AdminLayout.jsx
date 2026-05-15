@@ -190,7 +190,7 @@ export default function AdminLayout() {
           </nav>
 
           {/* Bottom */}
-          <div className="mt-auto">
+          <div className="">
 
             <div className="
               rounded-3xl

@@ -15,7 +15,7 @@ import {
 export default function Exam() {
   const { id } = useParams()
   const navigate = useNavigate()
-
+  const [showTheory, setShowTheory] = useState(false)
   const [cert, setCert] = useState(null)
   const [started, setStarted] = useState(false)
 
@@ -48,10 +48,14 @@ export default function Exam() {
   useEffect(() => {
     api
       .get(`/certifications/${id}`)
-      .then((res) => setCert(res.data))
+      .then((res) => {
+        setCert(res.data)
+        console.log("hguy,res", res)
+      })
       .catch(console.error)
-  }, [id])
 
+  }, [id])
+  console.log("bbbb", cert)
   const toggleMute = () => {
     const newState = !muted
 
@@ -61,7 +65,7 @@ export default function Exam() {
     if (newState) {
       tickRef.current?.pause()
     } else {
-      tickRef.current?.play().catch(() => {})
+      tickRef.current?.play().catch(() => { })
     }
   }
 
@@ -81,7 +85,7 @@ export default function Exam() {
       setStarted(true)
 
       if (!muted) {
-        tickRef.current?.play().catch(() => {})
+        tickRef.current?.play().catch(() => { })
       }
     } catch (err) {
       console.error(err)
@@ -184,9 +188,9 @@ export default function Exam() {
 
               <div className="px-4 py-3 rounded-2xl bg-white/5 border border-white/10">
                 <p className="text-xl font-bold">
-                  {cert.questions?.length
-                    ? Math.round((cert.passMark / cert.questions.length) * 100)
-                    : 60}%
+                  {cert._count?.questions
+                    ? Math.round((cert.passMark / cert._count?.questions) * 100)
+                    : 40}%
                 </p>
 
                 <p className="text-white/50 text-xs">
@@ -308,7 +312,7 @@ export default function Exam() {
             </div>
 
             {/* Real Certificate */}
-            <img
+            {/* <img
               src="/template.png"
               alt="certificate"
               data-aos="flip-left"
@@ -322,7 +326,82 @@ export default function Exam() {
                 shadow-[0_25px_80px_rgba(0,0,0,0.45)]
                 object-contain
               "
-            />
+            /> */}
+            <div
+              className="relative w-full max-w-[520px]"
+              data-aos="flip-left"
+              data-aos-delay="500"
+            >
+
+              {/* Certificate Image */}
+              <img
+                src="/template.png"
+                alt="certificate"
+                className="
+      w-full
+      rounded-[32px]
+      border
+      border-white/10
+      shadow-[0_25px_80px_rgba(0,0,0,0.45)]
+      object-contain
+    "
+              />
+
+              {/* Candidate Name */}
+              <div
+                className="
+      absolute
+      left-1/2
+      top-[39%]
+      md:top-[37%]
+      -translate-x-1/2
+      text-center
+      w-[80%]
+    "
+              >
+                <h2
+                  className="
+        text-[#2B1B0E]
+        text-2xl
+        md:text-3xl
+        font-bold
+        tracking-wide
+        italic
+      "
+                  style={{
+                    fontFamily: "'Times New Roman', serif",
+                  }}
+                >
+                  {candidateName || "Your Name"}
+                </h2>
+              </div>
+
+              {/* Course Title */}
+              <div
+                className="
+      absolute
+      left-1/2
+      top-[47%]
+      -translate-x-1/2
+      text-center
+      w-[75%]
+    "
+              >
+                <p
+                  className="
+        text-[#5A3A14]
+        text-sm
+        md:text-base
+        font-semibold
+      "
+                >
+                  {cert.title}
+                </p>
+              </div>
+
+              {/* Date */}
+              
+            </div>
           </div>
         </div>
       </section>
@@ -342,7 +421,7 @@ export default function Exam() {
 
     if (!muted) {
       clickRef.current.currentTime = 0
-      clickRef.current.play().catch(() => {})
+      clickRef.current.play().catch(() => { })
     }
 
     setTimeout(() => {
@@ -517,17 +596,24 @@ export default function Exam() {
             </h1>
 
             {/* Theory */}
-            <button className="
-              mb-6
-              px-4
-              py-2
-              rounded-xl
-              bg-[#0A4E84]
-              text-[#8FCBFF]
-              text-xs
-            ">
-              📘 Read Theory
-            </button>
+            {q.explanation && (
+              <button
+                onClick={() => setShowTheory(true)}
+                className="
+      mb-6
+      px-4
+      py-2
+      rounded-xl
+      bg-[#0A4E84]
+      hover:bg-[#1162A3]
+      text-[#8FCBFF]
+      text-xs
+      transition-all
+    "
+              >
+                📘 Read Theory
+              </button>
+            )}
 
             {/* Options */}
             <div className="space-y-4">
@@ -550,10 +636,9 @@ export default function Exam() {
                       flex
                       items-center
                       justify-between
-                      ${
-                        isSelected
-                          ? "bg-[#0E3B63] border-[#11B5FF]"
-                          : "bg-white/5 border-white/10 hover:border-white/30"
+                      ${isSelected
+                        ? "bg-[#0E3B63] border-[#11B5FF]"
+                        : "bg-white/5 border-white/10 hover:border-white/30"
                       }
                     `}
                   >
@@ -569,10 +654,9 @@ export default function Exam() {
                       flex
                       items-center
                       justify-center
-                      ${
-                        isSelected
-                          ? "border-[#11B5FF] bg-[#11B5FF]"
-                          : "border-white/30"
+                      ${isSelected
+                        ? "border-[#11B5FF] bg-[#11B5FF]"
+                        : "border-white/30"
                       }
                     `}>
                       {isSelected && (
@@ -586,6 +670,72 @@ export default function Exam() {
           </div>
         </div>
       </div>
+      {/* THEORY POPUP */}
+      {showTheory && (
+        <div
+          className="
+      fixed
+      inset-0
+      z-[100]
+      bg-black/70
+      backdrop-blur-sm
+      flex
+      items-center
+      justify-center
+      p-4
+    "
+          onClick={() => setShowTheory(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="
+        w-full
+        max-w-2xl
+        rounded-3xl
+        bg-[#082844]
+        border
+        border-white/10
+        shadow-2xl
+        overflow-hidden
+      "
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
+              <h2 className="text-xl font-bold text-white">
+                📘 Theory Explanation
+              </h2>
+
+              <button
+                onClick={() => setShowTheory(false)}
+                className="
+            w-10
+            h-10
+            rounded-full
+            bg-white/10
+            hover:bg-white/20
+            text-white
+            text-lg
+          "
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 max-h-[70vh] overflow-y-auto">
+              <div className="
+          whitespace-pre-wrap
+          leading-relaxed
+          text-[#D6E6F5]
+          text-sm
+          md:text-base
+        ">
+                {q.explanation}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
