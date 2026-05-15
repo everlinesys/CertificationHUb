@@ -57,7 +57,7 @@ export default function About() {
     ]
 
     return (
-        <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white overflow-hidden">
+        <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white overflow-hidden md:px-16">
             <Header />
 
             {/* HERO */}
