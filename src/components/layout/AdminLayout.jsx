@@ -1,5 +1,5 @@
 import { Outlet, NavLink, useNavigate } from "react-router-dom"
-
+import { ArrowUp } from "lucide-react"
 import {
   LayoutDashboard,
   PlusCircle,
@@ -13,13 +13,21 @@ import {
   Sparkles,
 } from "lucide-react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function AdminLayout() {
   const navigate = useNavigate()
-
+  const [showTop, setShowTop] = useState(false)
   const [open, setOpen] = useState(false)
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowTop(window.scrollY > 300)
+    }
 
+    window.addEventListener("scroll", handleScroll)
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
   const logout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
@@ -39,11 +47,10 @@ export default function AdminLayout() {
       transition-all
       duration-300
       font-medium
-      ${
-        isActive
-          ? "bg-[#11B5FF] text-white shadow-lg shadow-cyan-500/20"
-          : "text-[#9CB4C9] hover:bg-white/5 hover:text-white"
-      }
+      ${isActive
+      ? "bg-[#11B5FF] text-white shadow-lg shadow-cyan-500/20"
+      : "text-[#9CB4C9] hover:bg-white/5 hover:text-white"
+    }
     `
 
   const navItems = (
@@ -482,7 +489,37 @@ export default function AdminLayout() {
             label="Users"
           />
         </div>
-      </div>
+      </div>{/* Scroll To Top */}
+      {showTop && (
+        <button
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            })
+          }
+          className="
+      fixed
+      bottom-24
+      right-6
+      z-50
+      w-12
+      h-12
+      rounded-2xl
+      bg-[#11B5FF]
+      text-white
+      shadow-2xl
+      flex
+      items-center
+      justify-center
+      hover:scale-105
+      transition-all
+      duration-300
+    "
+        >
+          <ArrowUp className="w-5 h-5" />
+        </button>
+      )}
     </section>
   )
 }
@@ -503,11 +540,10 @@ function BottomLink({ to, icon: Icon, label }) {
           py-2
           rounded-2xl
           transition-all
-          ${
-            isActive
-              ? "bg-[#11B5FF] text-white"
-              : "text-white/50"
-          }
+          ${isActive
+          ? "bg-[#11B5FF] text-white"
+          : "text-white/50"
+        }
         `
       }
     >
