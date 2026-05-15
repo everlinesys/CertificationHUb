@@ -6,7 +6,7 @@ import Header from "../layout/Header"
 export default function Hero() {
   const navigate = useNavigate()
 
-  return (<div className="bg-[#062B45]">
+  return (<div className="bg-[#062B45] md:px-16">
     <div className=" md:flex fixed top-0 left-0 w-full z-50">
       <Header />
     </div>
@@ -18,10 +18,12 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
         {/* LEFT CONTENT */}
-        <div className="text-center lg:text-left">
+        <div className="text-center lg:text-left " data-aos="fade-right"
+          data-aos-delay="100">
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs mb-5 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs mb-5 backdrop-blur-md" data-aos="fade-up"
+            data-aos-delay="150">
             <Sparkles className="w-3 h-3 text-yellow-400" />
             AI Powered Skill Certification
           </div>
@@ -115,16 +117,16 @@ export default function Hero() {
         </div>
 
         {/* RIGHT VISUAL */}
-        <div className="relative flex justify-center lg:justify-end">
+        <div className="relative flex justify-center lg:justify-end md:w-[25vw]"
+          data-aos="zoom-in"
+          data-aos-delay="300">
 
           {/* Certificate Card */}
-          <div className="relative w-full max-w-[290px] sm:max-w-[350px] lg:max-w-[460px] rounded-3xl border border-[#D6B86B] bg-[#07131E] shadow-2xl">
-
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.12)_1px,_transparent_1px)] bg-[size:10px_10px]" />
+          {/* Real Certificate */}
+          <div className="relative w-full max-w-[300px] sm:max-w-[380px] lg:max-w-[500px]">
 
             {/* Floating Skill Badge */}
-            <div className="absolute top-[-8px] right-[-8px] sm:top-2 sm:right-4 bg-[#E7D38D] text-black font-bold rounded-2xl px-2.5 py-3 sm:px-3 sm:py-4 shadow-xl z-20">
+            <div className="absolute top-[-8px] md:top-[-30px] right-[-8px] md:right-[-30px] sm:top-2 sm:right-4 bg-[#E7D38D] text-black font-bold rounded-2xl px-2.5 py-3 sm:px-3 sm:py-4 shadow-xl z-20">
 
               <p className="text-[10px] sm:text-xs leading-tight">
                 Prove <br /> Your <br /> Skill in
@@ -135,79 +137,22 @@ export default function Hero() {
               </p>
             </div>
 
-            <div className="relative z-10 p-4 sm:p-6 lg:p-8">
-
-              {/* Top Seal */}
-              <div className="flex justify-center mb-4 sm:mb-5">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#D6B86B]/20 flex items-center justify-center border border-[#D6B86B]/30">
-                  <BadgeCheck className="text-[#E9D08A] w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
-              </div>
-
-              {/* Certificate Content */}
-              <div className="text-center">
-
-                <p className="text-[#E9D08A] text-2xl sm:text-3xl lg:text-4xl font-serif italic">
-                  Certificate
-                </p>
-
-                <p className="text-white/60 mt-2 sm:mt-3 text-[11px] sm:text-xs">
-                  This certificate is presented to
-                </p>
-
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-white mt-2">
-                  Alex Johnson
-                </h2>
-
-                <p className="text-white/70 mt-2 text-xs sm:text-sm">
-                  for successfully completing
-                </p>
-
-                <h3 className="text-[#E9D08A] text-base sm:text-xl mt-2 font-medium">
-                  Full Stack Development
-                </h3>
-              </div>
-
-              {/* Signatures */}
-              <div className="grid grid-cols-2 gap-4 sm:gap-6 mt-8 sm:mt-12">
-
-                <div className="text-center">
-                  <div className="h-[1px] bg-white/20 mb-2" />
-
-                  <p className="text-white text-[11px] sm:text-xs font-medium">
-                    John Carter
-                  </p>
-
-                  <p className="text-white/50 text-[9px] sm:text-[10px]">
-                    Co-Founder
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <div className="h-[1px] bg-white/20 mb-2" />
-
-                  <p className="text-white text-[11px] sm:text-xs font-medium">
-                    Sarah Blake
-                  </p>
-
-                  <p className="text-white/50 text-[9px] sm:text-[10px]">
-                    Director
-                  </p>
-                </div>
-              </div>
-
-              {/* Bottom Testimonial */}
-              <div className="mt-5 sm:mt-8 rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4 backdrop-blur-md">
-
-                <p className="text-white/80 italic leading-relaxed text-xs sm:text-sm">
-                  “This certificate helped me land interviews at top tech companies within weeks.”
-                </p>
-              </div>
-            </div>
+            <img
+              src="/template.png"
+              alt="certificate"
+              className="
+      w-full
+      rounded-3xl
+      shadow-[0_20px_80px_rgba(0,0,0,0.45)]
+      border
+      border-white/10
+      object-contain
+    "
+            />
           </div>
 
           {/* Floating Mobile Mockup */}
-          <div className="hidden lg:block absolute left-[-20px] bottom-[-10px] w-[140px] h-[290px] rounded-[32px] border-[6px] border-zinc-800 bg-zinc-900 shadow-2xl overflow-hidden">
+          <div className="hidden lg:block absolute left-[-20px]  bottom-[-10px] md:bottom-[-50px]  md:left-[-50px] w-[140px] h-[290px] rounded-[32px] border-[6px] border-zinc-800 bg-zinc-900 shadow-2xl overflow-hidden">
 
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 bg-black rounded-b-2xl z-20" />
 

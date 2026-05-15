@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
 import api from "../api"
 
 import {
@@ -38,23 +37,21 @@ export default function Category() {
   }
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white px-4 py-6 md:px-8 md:py-10">
+    <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white px-4 md:px-16 py-6 md:px-8 md:py-10">
 
       <div className="max-w-7xl mx-auto">
 
         {/* Top */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <div
           className="mb-10"
+          data-aos="fade-up"
         >
 
           {/* Back */}
-          <motion.button
-            whileHover={{ x: -4 }}
-            whileTap={{ scale: 0.96 }}
+          <button
             onClick={() => navigate(-1)}
+            data-aos="fade-right"
+            data-aos-delay="100"
             className="
               flex
               items-center
@@ -67,13 +64,12 @@ export default function Category() {
           >
             <ChevronLeft className="w-5 h-5" />
             Back
-          </motion.button>
+          </button>
 
           {/* Hero */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+          <div
+            data-aos="zoom-in"
+            data-aos-delay="150"
             className="
               relative
               overflow-hidden
@@ -82,8 +78,8 @@ export default function Category() {
               border-white/10
               bg-white/[0.03]
               backdrop-blur-md
-              p-6
-              md:p-10
+              p-5
+              md:p-8
             "
           >
 
@@ -93,10 +89,9 @@ export default function Category() {
             <div className="relative z-10">
 
               {/* Tag */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
+              <div
+                data-aos="fade-up"
+                data-aos-delay="250"
                 className="
                   inline-flex
                   items-center
@@ -108,42 +103,39 @@ export default function Category() {
                   border
                   border-white/10
                   text-white/70
-                  text-sm
+                  text-xs
                   mb-5
                 "
               >
                 <ShieldCheck className="w-4 h-4 text-[#11B5FF]" />
                 Industry Recognised Certification
-              </motion.div>
+              </div>
 
               {/* Title */}
-              <motion.h1
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-4xl md:text-6xl font-bold leading-tight"
+              <h1
+                data-aos="fade-up"
+                data-aos-delay="350"
+                className="text-3xl md:text-5xl font-bold leading-tight"
               >
                 {category?.name || ""}{" "}
                 <span className="text-[#11B5FF]">
                   Certifications
                 </span>
-              </motion.h1>
+              </h1>
 
               {/* Description */}
-              <motion.p
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="mt-4 text-[#A7BDD1] max-w-2xl text-sm md:text-lg leading-relaxed"
+              <p
+                data-aos="fade-up"
+                data-aos-delay="450"
+                className="mt-4 text-[#A7BDD1] max-w-2xl text-sm md:text-base leading-relaxed"
               >
                 Choose a certification path and validate your skills with real-world assessments trusted by recruiters and companies worldwide.
-              </motion.p>
+              </p>
 
               {/* Stats */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+              <div
+                data-aos="fade-up"
+                data-aos-delay="550"
                 className="flex flex-wrap gap-4 mt-8"
               >
 
@@ -161,9 +153,10 @@ export default function Category() {
                     label: "Rated",
                   },
                 ].map((item, i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    whileHover={{ y: -4 }}
+                    data-aos="zoom-in"
+                    data-aos-delay={650 + i * 100}
                     className="
                       px-4
                       py-3
@@ -173,25 +166,24 @@ export default function Category() {
                       border-white/10
                     "
                   >
-                    <p className="text-2xl font-bold">
+                    <p className="text-xl font-bold">
                       {item.value}
                     </p>
 
-                    <p className="text-white/50 text-sm">
+                    <p className="text-white/50 text-xs">
                       {item.label}
                     </p>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Empty */}
         {certs.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <div
+            data-aos="fade-up"
             className="
               text-center
               py-20
@@ -203,35 +195,25 @@ export default function Category() {
           >
             <Trophy className="w-12 h-12 mx-auto text-white/20 mb-4" />
 
-            <h3 className="text-2xl font-semibold mb-2">
+            <h3 className="text-xl font-semibold mb-2">
               No Certifications Found
             </h3>
 
-            <p className="text-white/50">
+            <p className="text-white/50 text-sm">
               New certification programs will appear here soon.
             </p>
-          </motion.div>
+          </div>
         )}
 
         {/* Certifications Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
 
           {certs.map((cert, index) => (
-            <motion.button
+            <button
               key={cert.id}
               onClick={() => navigate(`/exam/${cert.id}`)}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.06,
-              }}
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-              }}
-              whileTap={{ scale: 0.98 }}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
               className="
                 group
                 relative
@@ -243,6 +225,7 @@ export default function Category() {
                 hover:border-[#4A86C5]
                 transition-all
                 duration-300
+                hover:-translate-y-1
                 hover:shadow-[0_15px_50px_rgba(0,0,0,0.3)]
                 text-left
               "
@@ -272,17 +255,15 @@ export default function Category() {
                 to-[#8CC63F]
               " />
 
-              <div className="relative z-10 p-6">
+              <div className="relative z-10 p-5">
 
                 {/* Top */}
-                <div className="flex items-start justify-between mb-6">
+                <div className="flex items-start justify-between mb-5">
 
-                  <motion.div
-                    whileHover={{ rotate: 6, scale: 1.08 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                  <div
                     className="
-                      w-14
-                      h-14
+                      w-12
+                      h-12
                       rounded-2xl
                       bg-white/5
                       border
@@ -292,8 +273,8 @@ export default function Category() {
                       justify-center
                     "
                   >
-                    <Layout className="w-7 h-7 text-[#11B5FF]" />
-                  </motion.div>
+                    <Layout className="w-6 h-6 text-[#11B5FF]" />
+                  </div>
 
                   <div className="
                     px-3
@@ -303,7 +284,7 @@ export default function Category() {
                     border
                     border-[#8CC63F]/20
                     text-[#8CC63F]
-                    text-xs
+                    text-[10px]
                     font-semibold
                   ">
                     Popular
@@ -311,7 +292,7 @@ export default function Category() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl font-bold leading-snug mb-3">
+                <h3 className="text-xl font-bold leading-snug mb-3">
                   {cert.title}
                 </h3>
 
@@ -321,7 +302,7 @@ export default function Category() {
                 </p>
 
                 {/* Meta */}
-                <div className="flex items-center gap-4 mt-6 text-sm text-white/60">
+                <div className="flex items-center gap-4 mt-6 text-xs text-white/60">
 
                   <div className="flex items-center gap-2">
                     <Layout className="w-4 h-4" />
@@ -350,32 +331,32 @@ export default function Category() {
                 ">
 
                   <div>
-                    <p className="text-white/40 text-xs">
+                    <p className="text-white/40 text-[10px]">
                       Certification Exam
                     </p>
 
-                    <p className="font-semibold">
+                    <p className="font-semibold text-sm">
                       Beginner to Advanced
                     </p>
                   </div>
 
-                  <motion.div
-                    whileHover={{ x: 4 }}
+                  <div
                     className="
                       flex
                       items-center
                       gap-2
                       text-[#11B5FF]
                       font-semibold
+                      text-sm
                     "
                   >
                     Start
 
                     <PlayCircle className="w-5 h-5" />
-                  </motion.div>
+                  </div>
                 </div>
               </div>
-            </motion.button>
+            </button>
           ))}
         </div>
       </div>

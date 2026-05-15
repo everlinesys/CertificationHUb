@@ -9,7 +9,6 @@ import {
   Play,
   CheckCircle2,
   Timer,
-  Trophy,
   ShieldCheck,
 } from "lucide-react"
 
@@ -62,7 +61,7 @@ export default function Exam() {
     if (newState) {
       tickRef.current?.pause()
     } else {
-      tickRef.current?.play().catch(() => { })
+      tickRef.current?.play().catch(() => {})
     }
   }
 
@@ -82,7 +81,7 @@ export default function Exam() {
       setStarted(true)
 
       if (!muted) {
-        tickRef.current?.play().catch(() => { })
+        tickRef.current?.play().catch(() => {})
       }
     } catch (err) {
       console.error(err)
@@ -102,89 +101,118 @@ export default function Exam() {
   // BEFORE START
   if (!started) {
     return (
-      <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white px-4 py-6">
+      <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white px-4 md:px-16 py-6">
 
+        {/* Back */}
         <button
           onClick={() => navigate(-1)}
+          data-aos="fade-right"
           className="flex items-center gap-2 text-white/60 hover:text-white mb-6"
         >
           <ChevronLeft className="w-5 h-5" />
           Back
         </button>
+
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
 
           {/* LEFT */}
-          <div>
+          <div
+            data-aos="fade-right"
+            data-aos-delay="100"
+          >
 
-            <div className="
-              inline-flex
-              items-center
-              gap-2
-              px-4
-              py-2
-              rounded-full
-              bg-white/5
-              border
-              border-white/10
-              text-white/70
-              text-sm
-              mb-6
-            ">
+            {/* Badge */}
+            <div
+              data-aos="fade-up"
+              data-aos-delay="150"
+              className="
+                inline-flex
+                items-center
+                gap-2
+                px-4
+                py-2
+                rounded-full
+                bg-white/5
+                border
+                border-white/10
+                text-white/70
+                text-xs
+                mb-5
+              "
+            >
               <ShieldCheck className="w-4 h-4 text-[#11B5FF]" />
               AI Verified Certification
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+            {/* Heading */}
+            <h1
+              data-aos="fade-up"
+              data-aos-delay="250"
+              className="text-3xl md:text-5xl font-bold leading-tight"
+            >
               Get Certified In{" "}
               <span className="text-[#11B5FF]">
                 {cert.title}
               </span>
             </h1>
 
-            <p className="mt-5 text-[#A8BED1] text-lg leading-relaxed">
+            {/* Subtext */}
+            <p
+              data-aos="fade-up"
+              data-aos-delay="350"
+              className="mt-5 text-[#A8BED1] text-sm md:text-lg leading-relaxed"
+            >
               Complete the assessment and unlock a shareable certificate recognised by companies worldwide.
             </p>
 
             {/* Stats */}
-            <div className="flex flex-wrap gap-4 mt-8">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="450"
+              className="flex flex-wrap gap-4 mt-8"
+            >
 
-              <div className="px-5 py-4 rounded-2xl bg-white/5 border border-white/10">
-                <p className="text-2xl font-bold">
+              <div className="px-4 py-3 rounded-2xl bg-white/5 border border-white/10">
+                <p className="text-xl font-bold">
                   {cert.duration || 10}m
                 </p>
 
-                <p className="text-white/50 text-sm">
+                <p className="text-white/50 text-xs">
                   Duration
                 </p>
               </div>
 
-              <div className="px-5 py-4 rounded-2xl bg-white/5 border border-white/10">
-                <p className="text-2xl font-bold">
+              <div className="px-4 py-3 rounded-2xl bg-white/5 border border-white/10">
+                <p className="text-xl font-bold">
                   {cert.questions?.length
                     ? Math.round((cert.passMark / cert.questions.length) * 100)
                     : 60}%
                 </p>
 
-                <p className="text-white/50 text-sm">
+                <p className="text-white/50 text-xs">
                   Pass Mark
                 </p>
               </div>
 
-              <div className="px-5 py-4 rounded-2xl bg-white/5 border border-white/10">
-                <p className="text-2xl font-bold">
+              <div className="px-4 py-3 rounded-2xl bg-white/5 border border-white/10">
+                <p className="text-xl font-bold">
                   AI
                 </p>
 
-                <p className="text-white/50 text-sm">
+                <p className="text-white/50 text-xs">
                   Evaluated
                 </p>
               </div>
             </div>
 
             {/* Form */}
-            <div className="mt-10">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="550"
+              className="mt-8"
+            >
 
-              <label className="text-sm text-white/60 mb-2 block">
+              <label className="text-xs text-white/60 mb-2 block">
                 Candidate Name
               </label>
 
@@ -200,6 +228,7 @@ export default function Exam() {
                   border
                   border-[#3D6D9B]
                   px-5
+                  text-sm
                   text-white
                   placeholder:text-[#7E9AB2]
                   outline-none
@@ -219,6 +248,7 @@ export default function Exam() {
                   bg-[#8CC63F]
                   hover:bg-[#9FD94B]
                   text-black
+                  text-sm
                   font-bold
                   transition-all
                   duration-300
@@ -242,106 +272,57 @@ export default function Exam() {
           </div>
 
           {/* RIGHT CERTIFICATE */}
-          <div className="relative">
+          <div
+            className="relative flex justify-center md:w-[30vw]"
+            data-aos="zoom-in"
+            data-aos-delay="300"
+          >
 
-            <div className="
-              relative
-              overflow-hidden
-              rounded-[36px]
-              border
-              border-[#D6B86B]
-              bg-[#07131E]
-              shadow-2xl
-            ">
+            {/* Floating Badge */}
+            <div
+              data-aos="fade-left"
+              data-aos-delay="700"
+              className="
+                absolute
+                top-4
+                right-4
+                md:top-[-20px]
+                md:right-[-20px]
+                z-20
+                bg-[#E7D38D]
+                text-black
+                font-bold
+                rounded-2xl
+                px-4
+                py-4
+                shadow-2xl
+              "
+            >
+              <p className="text-[10px] leading-tight">
+                AI <br /> Verified
+              </p>
 
-              {/* Background */}
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.12)_1px,_transparent_1px)] bg-[size:10px_10px]" />
-
-              <div className="relative z-10 p-8 md:p-10">
-
-                {/* Top */}
-                <div className="flex justify-center mb-8">
-                  <div className="
-                    w-16
-                    h-16
-                    rounded-full
-                    bg-[#D6B86B]/10
-                    border
-                    border-[#D6B86B]/20
-                    flex
-                    items-center
-                    justify-center
-                  ">
-                    <Trophy className="w-8 h-8 text-[#E9D08A]" />
-                  </div>
-                </div>
-
-                <div className="text-center">
-
-                  <p className="text-[#E9D08A] text-5xl font-serif italic">
-                    Certificate
-                  </p>
-
-                  <p className="text-white/50 mt-5 text-sm">
-                    This certificate is presented to
-                  </p>
-
-                  <h2 className="text-4xl font-semibold text-white mt-3">
-                    {candidateName || "Your Name"}
-                  </h2>
-
-                  <p className="text-white/60 mt-4">
-                    for successfully completing
-                  </p>
-
-                  <h3 className="text-[#E9D08A] text-2xl mt-2 font-medium">
-                    {cert.title}
-                  </h3>
-                </div>
-
-                {/* Bottom */}
-                <div className="grid grid-cols-2 gap-8 mt-16">
-
-                  <div className="text-center">
-                    <div className="h-[1px] bg-white/20 mb-3" />
-
-                    <p className="text-white text-sm font-medium">
-                      AI Evaluated
-                    </p>
-
-                    <p className="text-white/50 text-xs">
-                      LearnBridge Certification
-                    </p>
-                  </div>
-
-                  <div className="text-center">
-                    <div className="h-[1px] bg-white/20 mb-3" />
-
-                    <p className="text-white text-sm font-medium">
-                      Industry Ready
-                    </p>
-
-                    <p className="text-white/50 text-xs">
-                      Certification
-                    </p>
-                  </div>
-                </div>
-
-                {/* Quote */}
-                <div className="
-                  mt-10
-                  rounded-2xl
-                  bg-white/5
-                  border
-                  border-white/10
-                  p-5
-                ">
-                  <p className="text-white/80 italic text-sm leading-relaxed">
-                    “This certification validates practical skills and real-world understanding.”
-                  </p>
-                </div>
-              </div>
+              <p className="text-2xl font-black mt-1">
+                Cert
+              </p>
             </div>
+
+            {/* Real Certificate */}
+            <img
+              src="/template.png"
+              alt="certificate"
+              data-aos="flip-left"
+              data-aos-delay="500"
+              className="
+                w-full
+                max-w-[520px]
+                rounded-[32px]
+                border
+                border-white/10
+                shadow-[0_25px_80px_rgba(0,0,0,0.45)]
+                object-contain
+              "
+            />
           </div>
         </div>
       </section>
@@ -361,7 +342,7 @@ export default function Exam() {
 
     if (!muted) {
       clickRef.current.currentTime = 0
-      clickRef.current.play().catch(() => { })
+      clickRef.current.play().catch(() => {})
     }
 
     setTimeout(() => {
@@ -386,7 +367,7 @@ export default function Exam() {
   }
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white">
+    <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white ">
 
       {/* Sound */}
       <button
@@ -396,8 +377,8 @@ export default function Exam() {
           bottom-6
           right-6
           z-50
-          w-14
-          h-14
+          w-12
+          h-12
           rounded-full
           bg-white/10
           backdrop-blur-md
@@ -424,15 +405,15 @@ export default function Exam() {
             onClick={() => navigate(-1)}
             className="text-white/60 hover:text-white"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
 
           <div className="text-center">
-            <p className="text-white/50 text-sm">
+            <p className="text-white/50 text-xs">
               {candidateName}
             </p>
 
-            <h2 className="font-semibold">
+            <h2 className="font-semibold text-sm">
               {cert.title}
             </h2>
           </div>
@@ -441,7 +422,7 @@ export default function Exam() {
             flex
             items-center
             gap-2
-            text-sm
+            text-xs
             bg-white/5
             border
             border-white/10
@@ -457,7 +438,7 @@ export default function Exam() {
         {/* Progress */}
         <div className="mb-8">
 
-          <div className="flex items-center justify-between text-sm mb-2 text-white/60">
+          <div className="flex items-center justify-between text-xs mb-2 text-white/60">
             <span>
               Q{index + 1}/{cert.questions.length}
             </span>
@@ -506,7 +487,7 @@ export default function Exam() {
                 px-4
                 py-2
                 rounded-xl
-                text-sm
+                text-xs
                 font-bold
               ">
                 Q{index + 1}/{cert.questions.length}
@@ -531,7 +512,7 @@ export default function Exam() {
           <div className="p-5 md:p-8">
 
             {/* Question */}
-            <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-8">
+            <h1 className="text-2xl md:text-4xl font-bold leading-tight mb-8">
               {q.question}
             </h1>
 
@@ -543,7 +524,7 @@ export default function Exam() {
               rounded-xl
               bg-[#0A4E84]
               text-[#8FCBFF]
-              text-sm
+              text-xs
             ">
               📘 Read Theory
             </button>
@@ -562,20 +543,21 @@ export default function Exam() {
                       w-full
                       rounded-2xl
                       border
-                      p-5
+                      p-4
                       text-left
                       transition-all
                       duration-200
                       flex
                       items-center
                       justify-between
-                      ${isSelected
-                        ? "bg-[#0E3B63] border-[#11B5FF]"
-                        : "bg-white/5 border-white/10 hover:border-white/30"
+                      ${
+                        isSelected
+                          ? "bg-[#0E3B63] border-[#11B5FF]"
+                          : "bg-white/5 border-white/10 hover:border-white/30"
                       }
                     `}
                   >
-                    <span className="text-lg font-medium">
+                    <span className="text-sm md:text-lg font-medium">
                       {opt}
                     </span>
 
@@ -587,9 +569,10 @@ export default function Exam() {
                       flex
                       items-center
                       justify-center
-                      ${isSelected
-                        ? "border-[#11B5FF] bg-[#11B5FF]"
-                        : "border-white/30"
+                      ${
+                        isSelected
+                          ? "border-[#11B5FF] bg-[#11B5FF]"
+                          : "border-white/30"
                       }
                     `}>
                       {isSelected && (

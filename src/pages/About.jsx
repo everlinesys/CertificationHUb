@@ -7,7 +7,7 @@ import {
     ArrowRight,
     CheckCircle2,
     Sparkles,
-    Trophy,
+    ChevronLeft,
 } from "lucide-react"
 import Header from "../components/layout/Header"
 
@@ -36,60 +36,78 @@ export default function About() {
     const features = [
         {
             icon: BrainCircuit,
-            title: "AI-Powered Assessments",
-            desc: "Smart evaluations designed to test real-world practical understanding instead of memorisation.",
+            title: "AI Assessments",
+            desc: "Smart evaluations designed to test practical understanding instead of memorisation.",
         },
         {
             icon: ShieldCheck,
-            title: "Industry Recognised",
-            desc: "Certificates crafted to showcase verified skills trusted by recruiters and hiring teams.",
+            title: "Industry Trusted",
+            desc: "Certificates showcasing verified skills trusted by recruiters.",
         },
         {
             icon: GraduationCap,
-            title: "Skill Based Learning",
-            desc: "Focused certifications that help learners become job-ready faster with targeted assessments.",
+            title: "Skill Focused",
+            desc: "Job-ready certifications with practical assessments.",
         },
         {
             icon: Globe,
-            title: "Accessible Worldwide",
-            desc: "Take certification exams from anywhere and share verified credentials globally.",
+            title: "Global Access",
+            desc: "Take assessments anywhere and share credentials globally.",
         },
     ]
 
     return (
         <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white overflow-hidden">
             <Header />
+
             {/* HERO */}
-            <div className="relative px-4 md:px-8 pt-24 pb-20">
+            <div className="relative px-4 md:px-8  pb-20">
 
                 {/* Glow */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-cyan-500/10 blur-[140px] rounded-full" />
 
-                <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+                {/* Back Nav */}
+              
+                    
+              
+                <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
 
                     {/* LEFT */}
-                    <div>
+                    <div
+                        data-aos="fade-right"
+                        data-aos-delay="100"
+                    >
 
-                        <div className="
-              inline-flex
-              items-center
-              gap-2
-              px-4
-              py-2
-              rounded-full
-              bg-white/5
-              border
-              border-white/10
-              text-white/70
-              text-sm
-              mb-6
-              backdrop-blur-md
-            ">
+                        {/* Badge */}
+                        <div
+                            className="
+                inline-flex
+                items-center
+                gap-2
+                px-4
+                py-2
+                rounded-full
+                bg-white/5
+                border
+                border-white/10
+                text-white/70
+                text-xs
+                mb-5
+                backdrop-blur-md
+              "
+                            data-aos="fade-up"
+                            data-aos-delay="150"
+                        >
                             <Sparkles className="w-4 h-4 text-[#11B5FF]" />
                             The Future Of Skill Verification
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl font-black leading-[1.05]">
+                        {/* Heading */}
+                        <h1
+                            className="text-3xl md:text-5xl font-black leading-[1.05]"
+                            data-aos="fade-up"
+                            data-aos-delay="250"
+                        >
                             Build Skills.
                             <br />
 
@@ -102,23 +120,33 @@ export default function About() {
                             Get Certified.
                         </h1>
 
-                        <p className="mt-6 text-[#A8BED1] text-lg md:text-xl leading-relaxed max-w-2xl">
-                            LearnBridge is an AI-powered certification platform helping learners validate real-world skills through modern, industry-focused assessments.
+                        {/* Subtext */}
+                        <p
+                            className="mt-5 text-[#A8BED1] text-sm md:text-lg leading-relaxed max-w-2xl"
+                            data-aos="fade-up"
+                            data-aos-delay="350"
+                        >
+                            LearnBridge helps learners validate real-world skills through AI-powered, industry-focused assessments.
                         </p>
 
                         {/* CTA */}
-                        <div className="flex flex-wrap gap-4 mt-10">
+                        <div
+                            className="flex flex-wrap gap-4 mt-8"
+                            data-aos="fade-up"
+                            data-aos-delay="450"
+                        >
 
                             <button
                                 onClick={() => navigate("/categories")}
                                 className="
                   group
-                  px-7
-                  py-4
+                  px-6
+                  py-3
                   rounded-2xl
                   bg-[#8CC63F]
                   hover:bg-[#9EDB4B]
                   text-black
+                  text-sm
                   font-bold
                   transition-all
                   duration-300
@@ -130,20 +158,21 @@ export default function About() {
                             >
                                 Explore Certifications
 
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </button>
 
                             <button
                                 onClick={() => navigate("/")}
                                 className="
-                  px-7
-                  py-4
+                  px-6
+                  py-3
                   rounded-2xl
                   bg-white/5
                   border
                   border-white/10
                   hover:bg-white/10
                   transition-all
+                  text-sm
                 "
                             >
                                 Back Home
@@ -151,25 +180,31 @@ export default function About() {
                         </div>
 
                         {/* Stats */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+                        <div
+                            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10"
+                            data-aos="fade-up"
+                            data-aos-delay="550"
+                        >
 
-                            {stats.map((s) => (
+                            {stats.map((s, idx) => (
                                 <div
                                     key={s.label}
+                                    data-aos="zoom-in"
+                                    data-aos-delay={600 + idx * 100}
                                     className="
                     rounded-2xl
                     bg-white/5
                     border
                     border-white/10
-                    p-5
+                    p-4
                     backdrop-blur-md
                   "
                                 >
-                                    <h3 className="text-3xl font-bold">
+                                    <h3 className="text-2xl font-bold">
                                         {s.value}
                                     </h3>
 
-                                    <p className="text-white/50 text-sm mt-1">
+                                    <p className="text-white/50 text-xs mt-1">
                                         {s.label}
                                     </p>
                                 </div>
@@ -178,144 +213,100 @@ export default function About() {
                     </div>
 
                     {/* RIGHT VISUAL */}
-                    <div className="relative">
+                    <div
+                        className="relative flex justify-center"
+                        data-aos="zoom-in"
+                        data-aos-delay="300"
+                    >
 
-                        <div className="
-              relative
-              overflow-hidden
-              rounded-[36px]
-              border
-              border-[#D6B86B]
-              bg-[#07131E]
-              shadow-2xl
-            ">
+                        {/* Floating Badge */}
+                        <div
+                            className="
+                absolute
+                top-2
+                right-2
+                md:top-[-20px]
+                md:right-[-20px]
+                z-20
+                bg-[#E7D38D]
+                text-black
+                font-bold
+                rounded-2xl
+                px-4
+                py-4
+                shadow-2xl
+              "
+                            data-aos="fade-left"
+                            data-aos-delay="700"
+                        >
+                            <p className="text-[10px] leading-tight">
+                                AI <br /> Verified
+                            </p>
 
-                            {/* Pattern */}
-                            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.12)_1px,_transparent_1px)] bg-[size:10px_10px]" />
+                            <p className="text-2xl font-black mt-1">
+                                Cert
+                            </p>
+                        </div>
 
-                            <div className="relative z-10 p-8 md:p-10">
+                        {/* Real Certificate */}
+                        <img
+                            src="/template.png"
+                            alt="certificate"
+                            data-aos="flip-left"
+                            data-aos-delay="500"
+                            className="
+                w-full
+                max-w-[420px]
+                rounded-[32px]
+                border
+                border-white/10
+                shadow-[0_25px_80px_rgba(0,0,0,0.45)]
+                object-contain
+              "
+                        />
 
-                                {/* Top */}
-                                <div className="flex justify-center mb-8">
-                                    <div className="
-                    w-16
-                    h-16
-                    rounded-full
-                    bg-[#D6B86B]/10
+                        {/* Floating Card */}
+                        <div
+                            className="
+                hidden md:block
+                absolute
+                -bottom-8
+                -left-8
+                rounded-3xl
+                bg-[#0D3454]
+                border
+                border-white/10
+                p-4
+                shadow-2xl
+                backdrop-blur-md
+              "
+                            data-aos="fade-up"
+                            data-aos-delay="900"
+                        >
+                            <div className="flex items-center gap-4">
+
+                                <div
+                                    className="
+                    w-12
+                    h-12
+                    rounded-2xl
+                    bg-[#8CC63F]/15
                     border
-                    border-[#D6B86B]/20
+                    border-[#8CC63F]/20
                     flex
                     items-center
                     justify-center
-                  ">
-                                        <Trophy className="w-8 h-8 text-[#E9D08A]" />
-                                    </div>
-                                </div>
-
-                                {/* Certificate */}
-                                <div className="text-center">
-
-                                    <p className="text-[#E9D08A] text-5xl font-serif italic">
-                                        Certificate
-                                    </p>
-
-                                    <p className="text-white/50 mt-5 text-sm">
-                                        This certificate is proudly awarded to
-                                    </p>
-
-                                    <h2 className="text-4xl font-semibold text-white mt-3">
-                                        Future Professionals
-                                    </h2>
-
-                                    <p className="text-white/60 mt-4">
-                                        for demonstrating practical expertise in
-                                    </p>
-
-                                    <h3 className="text-[#E9D08A] text-2xl mt-2 font-medium">
-                                        Industry Ready Skills
-                                    </h3>
-                                </div>
-
-                                {/* Bottom */}
-                                <div className="grid grid-cols-2 gap-8 mt-16">
-
-                                    <div className="text-center">
-                                        <div className="h-[1px] bg-white/20 mb-3" />
-
-                                        <p className="text-white text-sm font-medium">
-                                            AI Verified
-                                        </p>
-
-                                        <p className="text-white/50 text-xs">
-                                            LearnBridge
-                                        </p>
-                                    </div>
-
-                                    <div className="text-center">
-                                        <div className="h-[1px] bg-white/20 mb-3" />
-
-                                        <p className="text-white text-sm font-medium">
-                                            Trusted Globally
-                                        </p>
-
-                                        <p className="text-white/50 text-xs">
-                                            Certification
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {/* Quote */}
-                                <div className="
-                  mt-10
-                  rounded-2xl
-                  bg-white/5
-                  border
-                  border-white/10
-                  p-5
-                ">
-                                    <p className="text-white/80 italic text-sm leading-relaxed">
-                                        “Our mission is to make skill verification accessible, trusted, and globally recognised.”
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Floating Card */}
-                        <div className="
-              hidden md:block
-              absolute
-              -bottom-8
-              -left-8
-              rounded-3xl
-              bg-[#0D3454]
-              border
-              border-white/10
-              p-5
-              shadow-2xl
-              backdrop-blur-md
-            ">
-                            <div className="flex items-center gap-4">
-
-                                <div className="
-                  w-14
-                  h-14
-                  rounded-2xl
-                  bg-[#8CC63F]/15
-                  border
-                  border-[#8CC63F]/20
-                  flex
-                  items-center
-                  justify-center
-                ">
-                                    <CheckCircle2 className="w-7 h-7 text-[#8CC63F]" />
+                  "
+                                >
+                                    <CheckCircle2 className="w-6 h-6 text-[#8CC63F]" />
                                 </div>
 
                                 <div>
-                                    <h3 className="text-2xl font-bold">
+                                    <h3 className="text-xl font-bold">
                                         96%
                                     </h3>
 
-                                    <p className="text-white/50 text-sm">
+                                    <p className="text-white/50 text-xs">
                                         Completion Rate
                                     </p>
                                 </div>
@@ -330,89 +321,94 @@ export default function About() {
                 <div className="max-w-7xl mx-auto">
 
                     {/* Heading */}
-                    <div className="text-center mb-16">
+                    <div
+                        className="text-center mb-14"
+                        data-aos="fade-up"
+                    >
 
                         <div
                             className="
-          inline-flex
-          items-center
-          gap-2
-          px-4
-          py-2
-          rounded-full
-          bg-emerald-400/10
-          border
-          border-emerald-300/20
-          text-emerald-100
-          text-sm
-          mb-5
-          backdrop-blur-xl
-        "
+                inline-flex
+                items-center
+                gap-2
+                px-4
+                py-2
+                rounded-full
+                bg-emerald-400/10
+                border
+                border-emerald-300/20
+                text-emerald-100
+                text-xs
+                mb-5
+                backdrop-blur-xl
+              "
                         >
                             <ShieldCheck className="w-4 h-4 text-emerald-400" />
                             Why LearnBridge
                         </div>
 
-                        <h2 className="text-4xl md:text-6xl font-bold text-white">
+                        <h2 className="text-3xl md:text-5xl font-bold text-white">
                             Built For The
                             <span className="text-emerald-400">
                                 {" "}Modern Workforce
                             </span>
                         </h2>
 
-                        <p className="text-emerald-50/70 text-lg mt-5 max-w-3xl mx-auto">
-                            We combine AI, practical assessments, and modern certification design to create a better way to validate skills.
+                        <p className="text-emerald-50/70 text-sm md:text-lg mt-5 max-w-3xl mx-auto">
+                            AI-powered assessments and modern certifications designed for real-world skills.
                         </p>
                     </div>
 
                     {/* Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-                        {features.map((f) => {
+                        {features.map((f, idx) => {
                             const Icon = f.icon
 
                             return (
                                 <div
                                     key={f.title}
+                                    data-aos="fade-up"
+                                    data-aos-delay={idx * 150}
                                     className="
-              group
-              rounded-3xl
-              bg-emerald-400/[0.07]
-              border
-              border-emerald-300/10
-              p-7
-              backdrop-blur-xl
-              hover:bg-emerald-400/[0.11]
-              hover:border-emerald-300/30
-              transition-all
-              duration-300
-              hover:scale-[1.02]
-              hover:shadow-[0_0_40px_rgba(16,185,129,0.15)]
-            "
+                    group
+                    rounded-3xl
+                    bg-emerald-400/[0.07]
+                    border
+                    border-emerald-300/10
+                    p-6
+                    backdrop-blur-xl
+                    hover:bg-emerald-400/[0.11]
+                    hover:border-emerald-300/30
+                    transition-all
+                    duration-300
+                    hover:scale-[1.02]
+                    hover:shadow-[0_0_40px_rgba(16,185,129,0.15)]
+                  "
                                 >
 
                                     <div
                                         className="
-                w-16
-                h-16
-                rounded-2xl
-                bg-emerald-400/15
-                border
-                border-emerald-300/20
-                flex
-                items-center
-                justify-center
-                mb-6
-              "
+                      w-14
+                      h-14
+                      rounded-2xl
+                      bg-emerald-400/15
+                      border
+                      border-emerald-300/20
+                      flex
+                      items-center
+                      justify-center
+                      mb-5
+                    "
                                     >
-                                        <Icon className="w-8 h-8 text-emerald-400" />
+                                        <Icon className="w-7 h-7 text-emerald-400" />
                                     </div>
 
-                                    <h3 className="text-2xl font-bold mb-3 text-white">
+                                    <h3 className="text-xl font-bold mb-3 text-white">
                                         {f.title}
                                     </h3>
 
-                                    <p className="text-emerald-50/70 leading-relaxed">
+                                    <p className="text-emerald-50/70 text-sm leading-relaxed">
                                         {f.desc}
                                     </p>
                                 </div>

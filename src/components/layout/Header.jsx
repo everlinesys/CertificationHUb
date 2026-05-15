@@ -1,8 +1,17 @@
 import { Link, useNavigate } from "react-router-dom"
+import AOS from "aos"
+import "aos/dist/aos.css"
+import { useEffect } from "react"
 
 export default function Header() {
   const navigate = useNavigate()
-
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      once: true,
+      easing: "ease-out-cubic",
+    })
+  }, [])
   const token = localStorage.getItem("token")
 
   const logout = () => {
@@ -14,10 +23,10 @@ export default function Header() {
   return (
     <header className=" top-0 left-0 w-full z-50 ">
       <div className=" max-w-7xl mx-auto px-6 py-6 flex items-center justify-center  bg-transparent">
-        
+
         {/* Center Container */}
         <div className="flex items-center gap-10 rounded-full border border-white/10 bg-white/[0.03]  px-6 py-3 shadow-[0_8px_40px_rgba(0,0,0,0.15)]">
-          
+
           {/* Logo */}
           <Link
             to="/"
@@ -26,7 +35,7 @@ export default function Header() {
             <img
               src="/logo.png"
               alt="Logo"
-              className="h-9 w-auto object-contain"
+              className="h-12 w-auto object-contain"
             />
 
             <span className="text-sm md:text-base font-semibold tracking-wide text-white">
@@ -39,7 +48,7 @@ export default function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-6">
-            
+
             {!token ? (
               <>
                 <Link

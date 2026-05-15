@@ -26,9 +26,11 @@ import MyCertificates from "./pages/student/MyCertificates"
 import Explore from "./pages/student/Explore"
 import CertificatePage from "./pages/Certificate"
 import About from "./pages/About"
+import ScrollToTop from "./components/layout/ScrollToTop"
 
 export default function App() {
-  return (
+  return (<>
+  <ScrollToTop/>
     <Routes>
 
       {/* 🌐 MAIN APP */}
@@ -80,6 +82,6 @@ export default function App() {
         <Route path="categories" element={<AdminCategories />} />
       </Route>
 
-    </Routes>
+    </Routes></>
   )
 }
