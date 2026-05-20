@@ -400,7 +400,7 @@ export default function Exam() {
               </div>
 
               {/* Date */}
-              
+
             </div>
           </div>
         </div>
@@ -425,11 +425,11 @@ export default function Exam() {
     }
 
     setTimeout(() => {
-      next()
+      next(newAns)
     }, 200)
   }
 
-  const next = () => {
+  const next = (finalAnswers = answers) => {
     if (index < cert.questions.length - 1) {
       setIndex(index + 1)
     } else {
@@ -438,12 +438,28 @@ export default function Exam() {
       navigate("/result", {
         state: {
           cert,
-          answers,
+          answers: finalAnswers,
           candidateName,
         },
       })
     }
   }
+
+  // const next = () => {
+  //   if (index < cert.questions.length - 1) {
+  //     setIndex(index + 1)
+  //   } else {
+  //     tickRef.current?.pause()
+
+  //     navigate("/result", {
+  //       state: {
+  //         cert,
+  //         answers,
+  //         candidateName,
+  //       },
+  //     })
+  //   }
+  // }
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white ">

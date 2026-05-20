@@ -298,10 +298,22 @@ export default function ResultGate() {
 
             {!user && (
               <button
-                onClick={() =>
-                  navigate("/login", {
-                    state: { cert, answers },
-                  })
+                onClick={() => {
+
+                  localStorage.setItem(
+                    "pending_attempt",
+                    JSON.stringify({
+                      cert,
+                      answers,
+                      candidateName,
+                      correct,
+                      passed,
+                      totalQuestions: cert.questions.length,
+                    })
+                  )
+
+                  navigate("/login")
+                }
                 }
                 className="
                   w-full
