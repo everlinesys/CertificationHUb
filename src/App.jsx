@@ -27,10 +27,13 @@ import Explore from "./pages/student/Explore"
 import CertificatePage from "./pages/Certificate"
 import About from "./pages/About"
 import ScrollToTop from "./components/layout/ScrollToTop"
+import Terms from "./pages/Terms"
+import Privacy from "./pages/Privacy"
+import Support from "./pages/Support"
 
 export default function App() {
   return (<>
-  <ScrollToTop/>
+    <ScrollToTop />
     <Routes>
 
       {/* 🌐 MAIN APP */}
@@ -47,6 +50,9 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/certificate/:id" element={<CertificatePage />} />
         <Route path="/about" element={<About />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/support" element={<Support />} />
         {/* 🔐 STUDENT ROUTES */}
         <Route
           path="/dashboard"
