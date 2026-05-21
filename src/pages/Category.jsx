@@ -10,6 +10,7 @@ import {
   Clock3,
   ShieldCheck,
 } from "lucide-react"
+import Header from "../components/layout/Header"
 
 export default function Category() {
   const { id } = useParams()
@@ -38,7 +39,7 @@ export default function Category() {
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white px-4 md:px-16 py-6 md:px-8 md:py-10">
-
+   <div className="hidden"><Header /></div>
       <div className="max-w-7xl mx-auto">
 
         {/* Top */}
@@ -80,6 +81,7 @@ export default function Category() {
               backdrop-blur-md
               p-5
               md:p-8
+              hidden
             "
           >
 

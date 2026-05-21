@@ -6,7 +6,7 @@ import Header from "../layout/Header"
 export default function Hero() {
   const navigate = useNavigate()
 
-  return (<div className="bg-[#062B45] md:px-16">
+  return (<div className="bg-red-900 md:px-16">
     <div className=" md:flex fixed top-0 left-0 w-full z-50">
       <Header />
     </div>
@@ -42,7 +42,7 @@ export default function Hero() {
             </span>
 
             <span className="text-[#E9D08A]">
-              1100+ Top
+              Top
             </span>{" "}
             Companies
           </h1>
@@ -54,14 +54,19 @@ export default function Hero() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex mt-10 flex-row gap-5 items-center">
-            <Button
-              onClick={() => navigate("/categories")}
-              className="
+           <Button
+  onClick={() => navigate("/categories")}
+  className="
     group
     relative
     overflow-hidden
-    bg-[#8CC63F]
-    hover:bg-[#99D14B]
+    bg-gradient-to-r
+    from-[#D4AF37]
+    via-[#F4D03F]
+    to-[#C89B2B]
+    hover:from-[#E0BC4A]
+    hover:via-[#FFD95A]
+    hover:to-[#D6A93A]
     text-black
     font-bold
     px-8
@@ -70,33 +75,34 @@ export default function Hero() {
     transition-all
     duration-300
     hover:scale-[1.03]
-    shadow-[0_10px_40px_rgba(140,198,63,0.35)]
+    shadow-[0_10px_40px_rgba(212,175,55,0.35)]
   "
-            >
-              <span
-                className="
+>
+  {/* Golden Shimmer */}
+  <span
+    className="
       absolute
       inset-0
       -translate-x-[150%]
       animate-shimmer
       bg-gradient-to-r
       from-transparent
-      via-white/30
+      via-[#FFF6CC]/50
       to-transparent
       skew-x-[-20deg]
     "
-              />
+  />
 
-              <span className="relative flex items-center gap-2">
-                Get Certified
+  <span className="relative flex items-center gap-2 text-black">
+    Get Certified
 
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </Button>
+    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+  </span>
+</Button>
 
             <button
               onClick={() => navigate("/about")}
-              className="text-white/70 hover:text-white transition-colors font-medium"
+              className="text-white/70 hover:text-white transition-colors font-medium "
             >
               Explore Programs
             </button>

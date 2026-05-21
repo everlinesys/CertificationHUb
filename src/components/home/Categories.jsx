@@ -12,6 +12,7 @@ import {
   Laptop,
   Wrench,
 } from "lucide-react"
+import Header from "../layout/Header"
 
 const iconMap = {
   Arduino: Cpu,
@@ -41,7 +42,7 @@ export default function Categories() {
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white px-4 md:px-16 py-6 md:px-8 md:py-10">
-
+      <div className="hidden"><Header /></div>
       <div className="max-w-5xl mx-auto">
 
         {/* Heading */}
@@ -74,8 +75,8 @@ export default function Categories() {
             data-aos-delay="200"
             className="text-3xl md:text-5xl font-bold leading-tight"
           >
-            What <span className="text-[#11B5FF]">Skill</span> Do You Want To
-            Get Certified In?
+            Select <span className="text-[#11B5FF]">Your Skill</span> & Start Your
+            Certification Journey
           </h1>
 
           <p
@@ -127,7 +128,7 @@ export default function Categories() {
         >
 
           <div className="flex items-center gap-2">
-            <ChevronLeft className="w-5 h-5 text-white/80" />
+            <ChevronLeft className="w-5 h-5 text-white/80"  onClick={() => navigate(-1)} />
 
             <h2 className="text-lg md:text-2xl font-bold">
               Select A Skill

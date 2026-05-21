@@ -11,6 +11,7 @@ import {
   Timer,
   ShieldCheck,
 } from "lucide-react"
+import Header from "../components/layout/Header"
 
 export default function Exam() {
   const { id } = useParams()
@@ -27,7 +28,9 @@ export default function Exam() {
 
   const tickRef = useRef(null)
   const clickRef = useRef(null)
-
+  const [timeLeft, setTimeLeft] = useState(
+    (cert?.duration || 10) * 60
+  )
   const [muted, setMuted] = useState(
     localStorage.getItem("examMuted") === "true"
   )
@@ -93,7 +96,35 @@ export default function Exam() {
       setLoading(false)
     }
   }
+  useEffect(() => {
+    if (!started) return
 
+    setTimeLeft((cert?.duration || 10) * 60)
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer)
+
+          tickRef.current?.pause()
+
+          navigate("/result", {
+            state: {
+              cert,
+              answers,
+              candidateName,
+            },
+          })
+
+          return 0
+        }
+
+        return prev - 1
+      })
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [started])
   if (!cert) {
     return (
       <div className="min-h-screen bg-[#071D2E] flex items-center justify-center text-white">
@@ -106,10 +137,10 @@ export default function Exam() {
   if (!started) {
     return (
       <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white px-4 md:px-16 py-6">
-
+        <div className="hidden"><Header /></div>
         {/* Back */}
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => { navigate(-1) }}
           data-aos="fade-right"
           className="flex items-center gap-2 text-white/60 hover:text-white mb-6"
         >
@@ -444,7 +475,11 @@ export default function Exam() {
       })
     }
   }
-
+  const prev = () => {
+    if (index > 0) {
+      setIndex(index - 1)
+    }
+  }
   // const next = () => {
   //   if (index < cert.questions.length - 1) {
   //     setIndex(index + 1)
@@ -460,7 +495,12 @@ export default function Exam() {
   //     })
   //   }
   // }
+  const minutes = Math.floor(timeLeft / 60)
+  const seconds = timeLeft % 60
 
+  const formattedTime = `${minutes}:${seconds
+    .toString()
+    .padStart(2, "0")}`
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white ">
 
@@ -498,9 +538,9 @@ export default function Exam() {
 
           <button
             onClick={() => navigate(-1)}
-            className="text-white/60 hover:text-white"
+            className="text-white/60 hover:text-white flex items-center gap-2"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5" /> Exit
           </button>
 
           <div className="text-center">
@@ -526,7 +566,7 @@ export default function Exam() {
             py-2
           ">
             <Timer className="w-4 h-4 text-[#11B5FF]" />
-            {cert.questions.length * 2} mins
+            {formattedTime}
           </div>
         </div>
 
@@ -682,6 +722,42 @@ export default function Exam() {
                   </button>
                 )
               })}
+            </div>
+            <div className="flex items-center justify-between mt-8">
+              <button
+                onClick={prev}
+                disabled={index === 0}
+                className={`
+      px-5
+      py-3
+      rounded-2xl
+      border
+      transition-all
+      ${index === 0
+                    ? "opacity-40 cursor-not-allowed bg-white/5 border-white/10"
+                    : "bg-white/10 border-white/20 hover:bg-white/20"
+                  }
+    `}
+              >
+                Previous Question
+              </button>
+
+              <button
+                onClick={() => next()}
+                className="
+      px-5
+      py-3
+      rounded-2xl
+      bg-[#11B5FF]
+      hover:bg-[#2DC2FF]
+      text-black
+      font-semibold
+    "
+              >
+                {index === cert.questions.length - 1
+                  ? "Finish Exam"
+                  : "Next Question"}
+              </button>
             </div>
           </div>
         </div>
