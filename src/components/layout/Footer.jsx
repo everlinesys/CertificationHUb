@@ -3,10 +3,10 @@ import { ShieldCheck } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/10  bg-red-900 overflow-hidden min-w-full">
+    <footer className="relative border-t border-white/10  bg-[#001F3F] overflow-hidden min-w-full">
       
       {/* Glow */}
-      <div className="absolute inset-0 pointer-events-none  bg-red-900 ">
+      <div className="absolute inset-0 pointer-events-none bg-[#001F3F]">
         <div className="absolute bottom-[-120px] left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-cyan-500/10 blur-[120px] rounded-full" />
       </div>
 

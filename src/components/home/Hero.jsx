@@ -6,7 +6,7 @@ import Header from "../layout/Header"
 export default function Hero() {
   const navigate = useNavigate()
 
-  return (<div className="bg-red-900 md:px-16">
+  return (<div className="bg-[#001F3F] md:px-16">
     <div className=" md:flex fixed top-0 left-0 w-full z-50">
       <Header />
     </div>
@@ -24,14 +24,14 @@ export default function Hero() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs mb-5 backdrop-blur-md" data-aos="fade-up"
             data-aos-delay="150">
-            <Sparkles className="w-3 h-3 text-yellow-400" />
+            <Sparkles className="w-3 h-3 text-[#74C365]" />
             AI Powered Skill Certification
           </div>
 
           {/* Heading */}
           <h1 className="text-2xl sm:text-5xl md:text-5xl font-black leading-[1.05] tracking-tight text-white">
             Unlock Your{" "}
-            <span className="text-[#E9D08A]">
+            <span className=" text-[#74C365]">
               Certificate
             </span>
 
@@ -41,7 +41,7 @@ export default function Hero() {
               Recognised by
             </span>
 
-            <span className="text-[#E9D08A]">
+            <span className="old-text-[#E9D08A] text-[#74C365]">
               Top
             </span>{" "}
             Companies
@@ -132,7 +132,7 @@ export default function Hero() {
           <div className="relative w-full max-w-[300px] sm:max-w-[380px] lg:max-w-[500px]">
 
             {/* Floating Skill Badge */}
-            <div className="absolute top-[-8px] md:top-[-30px] right-[-8px] md:right-[-30px] sm:top-2 sm:right-4 bg-[#E7D38D] text-black font-bold rounded-2xl px-2.5 py-3 sm:px-3 sm:py-4 shadow-xl z-20">
+            <div className="absolute top-[-8px] md:top-[-30px] right-[-8px] md:right-[-30px] sm:top-2 sm:right-4 old-bg-[#E7D38D] bg-[#74C365] text-black font-bold rounded-2xl px-2.5 py-3 sm:px-3 sm:py-4 shadow-xl z-20">
 
               <p className="text-[10px] sm:text-xs leading-tight">
                 Prove <br /> Your <br /> Skill in
