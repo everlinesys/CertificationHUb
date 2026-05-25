@@ -41,7 +41,7 @@ export default function Categories() {
   )
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white px-4 md:px-16 py-6 md:px-8 md:py-10">
+    <section className="min-h-screen bg-[#001F3F] -bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white px-4 md:px-16 py-6 md:px-8 md:py-10">
       <div className="hidden"><Header /></div>
       <div className="max-w-5xl mx-auto">
 
@@ -53,7 +53,13 @@ export default function Categories() {
 
           {/* Back */}
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              if (window.history.length > 1) {
+                navigate(-1)
+              } else {
+                navigate("/")
+              }
+            }}
             data-aos="fade-right"
             data-aos-delay="100"
             className="
@@ -128,7 +134,13 @@ export default function Categories() {
         >
 
           <div className="flex items-center gap-2">
-            <ChevronLeft className="w-5 h-5 text-white/80"  onClick={() => navigate(-1)} />
+            <ChevronLeft className="w-5 h-5 text-white/80" onClick={() => {
+              if (window.history.length > 1) {
+                navigate(-1)
+              } else {
+                navigate("/")
+              }
+            }} />
 
             <h2 className="text-lg md:text-2xl font-bold">
               Select A Skill

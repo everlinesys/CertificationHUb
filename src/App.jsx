@@ -30,6 +30,8 @@ import ScrollToTop from "./components/layout/ScrollToTop"
 import Terms from "./pages/Terms"
 import Privacy from "./pages/Privacy"
 import Support from "./pages/Support"
+import ForgotPassword from "./pages/ForgotPassword"
+import VerifyCertificate from "./pages/VerifyCertificate"
 
 export default function App() {
   return (<>
@@ -53,6 +55,14 @@ export default function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/support" element={<Support />} />
+        <Route
+          path="/verify"
+          element={<VerifyCertificate />}
+        />
+        <Route
+          path="/forgot-password"
+          element={<ForgotPassword />}
+        />
         {/* 🔐 STUDENT ROUTES */}
         <Route
           path="/dashboard"

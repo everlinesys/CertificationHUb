@@ -389,7 +389,21 @@ export default function Login() {
                   )}
                 </button>
               </div>
-
+              <div className="text-right">
+                <span
+                  onClick={() =>
+                    navigate("/forgot-password")
+                  }
+                  className="
+      text-sm
+      text-[#11B5FF]
+      cursor-pointer
+      hover:text-[#45C6FF]
+    "
+                >
+                  Forgot Password?
+                </span>
+              </div>
               {/* Bottom */}
               <div className="
                 mt-8

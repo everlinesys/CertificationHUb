@@ -370,7 +370,13 @@ export default function ResultGate() {
 
             {user && !passed && (
               <button
-                onClick={() => navigate(-1)}
+                onClick={() => {
+                  if (window.history.length > 1) {
+                    navigate(-1)
+                  } else {
+                    navigate("/")
+                  }
+                }}
                 className="
                   w-full
                   md:w-auto

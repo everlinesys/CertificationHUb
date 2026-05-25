@@ -57,7 +57,7 @@ export default function About() {
     ]
 
     return (
-        <section className="min-h-screen bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white overflow-hidden md:px-16">
+        <section className="min-h-screen bg-[#001F3F] -bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white overflow-hidden md:px-16">
             <Header />
 
             {/* HERO */}
@@ -67,9 +67,9 @@ export default function About() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-cyan-500/10 blur-[140px] rounded-full" />
 
                 {/* Back Nav */}
-              
-                    
-              
+
+
+
                 <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
 
                     {/* LEFT */}
@@ -176,6 +176,30 @@ export default function About() {
                 "
                             >
                                 Back Home
+                            </button>
+                            <button
+                                onClick={() => navigate("/verify")}
+                                className="
+                  group
+                  px-6
+                  py-3
+                  rounded-2xl
+                  bg-[#8CC63F]
+                  hover:bg-[#9EDB4B]
+                  text-black
+                  text-sm
+                  font-bold
+                  transition-all
+                  duration-300
+                  hover:scale-[1.03]
+                  flex
+                  items-center
+                  gap-2
+                "
+                            >
+                                Verify A Certificate
+
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </button>
                         </div>
 
