@@ -164,7 +164,7 @@ export default function VerifyCertificate() {
           ">
                         Validate the authenticity of a
                         certificate issued through the
-                        Eduline Certification Platform.
+                        LearnBridge Certification Platform.
                     </p>
                 </div>
 
@@ -699,7 +699,7 @@ export default function VerifyCertificate() {
                       text-2xl
                       font-bold
                     ">
-                                            Eduline
+                                            LearnBridge
                                         </h3>
                                     </div>
                                 </div>
@@ -710,7 +710,7 @@ export default function VerifyCertificate() {
                 ">
                                     This certificate has been
                                     successfully verified in the
-                                    Eduline Certification System
+                                    LearnBridge Certification System
                                     and is confirmed authentic.
                                 </p>
 
