@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../api";
-import { Users, FileBadge } from "lucide-react";
+import { Users, FileBadge, ArrowUpRight, ShieldCheck } from "lucide-react";
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
@@ -20,7 +20,6 @@ export default function UsersPage() {
         api.get("/admin/certificates"),
       ]);
 
-      // Your images show data is directly in .data
       setUsers(usersRes.data || []);
       setCerts(certsRes.data || []);
     } catch (err) {
@@ -31,93 +30,118 @@ export default function UsersPage() {
   };
 
   if (loading) {
-    return <div className="text-white p-10">Loading Platform Data...</div>;
+    return (
+      <div className="space-y-6 animate-pulse">
+        {/* Header Skeleton */}
+        <div className="space-y-2">
+          <div className="h-6 w-48 bg-white/5 rounded" />
+          <div className="h-3 w-64 bg-white/5 rounded" />
+        </div>
+        {/* Metric Grid Skeleton */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="h-24 bg-white/[0.02] border border-white/5 rounded-xl" />
+          <div className="h-24 bg-white/[0.02] border border-white/5 rounded-xl" />
+        </div>
+        {/* Body List Skeleton */}
+        <div className="space-y-3">
+          <div className="h-20 bg-white/[0.02] border border-white/5 rounded-xl" />
+          <div className="h-20 bg-white/[0.02] border border-white/5 rounded-xl" />
+        </div>
+      </div>
+    );
   }
 
   return (
-    <section className="text-white min-h-screen p-4 md:p-8">
-      {/* Heading */}
-      <div className="mb-8">
-        <h1 className="text-3xl md:text-5xl font-bold">Platform Overview</h1>
-        <p className="text-white/50 mt-2 text-sm md:text-base">
-          Manage users and earned certificates
+    <div className="space-y-6 text-slate-200 antialiased">
+      {/* SECTION HEADER */}
+      <div>
+        <h1 className="text-xl font-bold tracking-tight text-white">Platform Overview</h1>
+        <p className="text-slate-500 text-xs mt-0.5 font-medium">
+          Manage system operational accounts and earned identity records
         </p>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-        <div className="rounded-3xl bg-white/[0.04] border border-white/10 p-6 backdrop-blur-xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-white/50 text-sm mb-2">Total Users</p>
-              <h2 className="text-4xl font-bold">{users.length}</h2>
-            </div>
-            <div className="w-16 h-16 rounded-2xl bg-[#11B5FF]/10 border border-[#11B5FF]/20 flex items-center justify-center">
-              <Users className="w-8 h-8 text-[#11B5FF]" />
-            </div>
+      {/* OPERATIONAL COUNTERS */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="rounded-xl bg-zinc-900/40 border border-white/5 p-4 flex items-center justify-between">
+          <div>
+            <p className="text-slate-500 text-[10px] font-semibold uppercase tracking-wider mb-1">Total Users</p>
+            <h2 className="text-2xl font-bold text-white tracking-tight font-mono">{users.length}</h2>
+          </div>
+          <div className="w-10 h-10 rounded-lg bg-[#11B5FF]/5 border border-[#11B5FF]/10 flex items-center justify-center">
+            <Users className="w-4 h-4 text-[#11B5FF]" />
           </div>
         </div>
 
-        <div className="rounded-3xl bg-white/[0.04] border border-white/10 p-6 backdrop-blur-xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-white/50 text-sm mb-2">Earned Certificates</p>
-              <h2 className="text-4xl font-bold">{certs.length}</h2>
-            </div>
-            <div className="w-16 h-16 rounded-2xl bg-[#8CC63F]/10 border border-[#8CC63F]/20 flex items-center justify-center">
-              <FileBadge className="w-8 h-8 text-[#8CC63F]" />
-            </div>
+        <div className="rounded-xl bg-zinc-900/40 border border-white/5 p-4 flex items-center justify-between">
+          <div>
+            <p className="text-slate-500 text-[10px] font-semibold uppercase tracking-wider mb-1">Issued Certificates</p>
+            <h2 className="text-2xl font-bold text-white tracking-tight font-mono">{certs.length}</h2>
+          </div>
+          <div className="w-10 h-10 rounded-lg bg-[#11B5FF]/5 border border-[#11B5FF]/10 flex items-center justify-center">
+            <FileBadge className="w-4 h-4 text-[#11B5FF]" />
           </div>
         </div>
       </div>
 
-      {/* Tabs */}
-      <div className="flex items-center gap-3 mb-8 bg-white/[0.03] border border-white/10 p-2 rounded-2xl w-fit">
+      {/* MATRIX CONTROLS */}
+      <div className="flex items-center gap-1 bg-zinc-900/80 border border-white/5 p-1 rounded-lg w-fit">
         <button
           onClick={() => setTab("users")}
-          className={`px-5 py-3 rounded-xl text-sm font-semibold transition-all ${tab === "users" ? "bg-[#11B5FF] text-white" : "text-white/60 hover:text-white"
-            }`}
+          className={`px-3 py-1.5 rounded-md text-xs font-medium transition ${
+            tab === "users"
+              ? "bg-white/5 text-[#11B5FF] border border-white/5 shadow-sm"
+              : "text-slate-400 hover:text-white"
+          }`}
         >
-          Users
+          Users Registry
         </button>
         <button
           onClick={() => setTab("certs")}
-          className={`px-5 py-3 rounded-xl text-sm font-semibold transition-all ${tab === "certs" ? "bg-[#8CC63F] text-black" : "text-white/60 hover:text-white"
-            }`}
+          className={`px-3 py-1.5 rounded-md text-xs font-medium transition ${
+            tab === "certs"
+              ? "bg-white/5 text-[#11B5FF] border border-white/5 shadow-sm"
+              : "text-slate-400 hover:text-white"
+          }`}
         >
-          Earned Certificates
+          Earned Records
         </button>
       </div>
 
-      {/* USERS LIST */}
+      {/* DATA TERMINAL VIEWPORTS */}
       {tab === "users" && (
-        <div className="space-y-4">
-          {users.length === 0 && <p className="text-white/40">No users found.</p>}
+        <div className="space-y-3">
+          {users.length === 0 && <p className="text-slate-500 text-xs italic p-2">No system records available.</p>}
           {users.map((u) => (
-            <div key={u.id} className="rounded-3xl bg-white/[0.04] border border-white/10 p-5 backdrop-blur-xl">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold">
-                    {/* u.name in your screenshot is "", so we provide a fallback */}
-                    {u.name || "Unnamed User"}
+            <div key={u.id} className="rounded-xl bg-zinc-900/20 border border-white/5 p-4 hover:border-white/10 transition">
+              <div className="flex items-start justify-between gap-4">
+                <div className="space-y-1">
+                  <h3 className="text-xs font-semibold text-white tracking-tight">
+                    {u.name || "Anonymous Platform Identity"}
                   </h3>
-                  <p className="text-white/50 text-sm mt-1">{u.email}</p>
-                  <p className="text-white/40 text-xs mt-2 uppercase tracking-wider">
-                    {u.role} • {u._count?.certificates || 0} Certificates
-                  </p>
+                  <p className="text-slate-400 text-xs font-mono">{u.email}</p>
+                  <div className="flex items-center gap-2 pt-1">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wide bg-white/5 px-2 py-0.5 rounded">
+                      {u.role || "User"}
+                    </span>
+                    <span className="text-[10px] font-medium text-slate-400">
+                      • {u._count?.certificates || 0} Records Secured
+                    </span>
+                  </div>
                 </div>
-                <div className="px-4 py-2 rounded-full bg-[#11B5FF]/10 border border-[#11B5FF]/20 text-[#11B5FF] text-xs font-semibold">
-                  Active
+                <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-emerald-500/5 border border-emerald-500/10 text-emerald-400 text-[10px] font-medium font-mono">
+                  <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
+                  ONLINE
                 </div>
               </div>
 
-              {/* Nested Certificates inside User */}
+              {/* Nested Badges */}
               {u.certificates?.length > 0 && (
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="mt-4 pt-3 border-t border-white/[0.02] flex flex-wrap gap-1.5">
                   {u.certificates.map((cert) => (
-                    <div key={cert.id} className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-white/70">
-                      {/* Note: Check if certification.title exists inside the user's certificate array */}
-                      {cert.certification?.title || "Course Certificate"}
+                    <div key={cert.id} className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/[0.02] border border-white/5 text-[10px] text-slate-400">
+                      <ShieldCheck className="w-3 h-3 text-[#11B5FF]/70" />
+                      {cert.certification?.title || "Standard Verification"}
                     </div>
                   ))}
                 </div>
@@ -127,52 +151,48 @@ export default function UsersPage() {
         </div>
       )}
 
-      {/* CERTIFICATES LIST */}
       {tab === "certs" && (
-        <div className="space-y-4">
-          {certs.length === 0 && <p className="text-white/40">No certificates issued yet.</p>}
+        <div className="space-y-3">
+          {certs.length === 0 && <p className="text-slate-500 text-xs italic p-2">No certificates currently issued.</p>}
           {certs.map((c) => (
-            <div key={c.id} className="rounded-3xl bg-white/[0.04] border border-white/10 p-5 backdrop-blur-xl">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold">
-                    {/* In image 2, title is inside the certification object */}
-                    {c.certification?.title || "Unknown Certification"}
+            <div key={c.id} className="rounded-xl bg-zinc-900/20 border border-white/5 p-4 hover:border-white/10 transition">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="min-w-0 space-y-1">
+                  <h3 className="text-xs font-semibold text-white tracking-tight truncate">
+                    {c.certification?.title || "Unknown Verification Track"}
                   </h3>
-                  <p className="text-white/50 text-sm mt-1">
-                    Earned by: {c.user?.email || "Unknown User"}
+                  <p className="text-slate-400 text-xs">
+                    Signatory Target: <span className="text-slate-300 font-mono">{c.user?.email || "Unlinked System Node"}</span>
                   </p>
-                  <p className="text-white/30 text-xs mt-2 font-mono">
-                    ID: {c.certificateNumber || c.id.slice(0, 8)}
+                  <p className="text-slate-500 text-[10px] font-mono tracking-tight">
+                    HASH: {c.certificateNumber || c.id.slice(0, 8)}
                   </p>
-                </div><div className="flex items-center gap-3">
-                  {/* VIEW BUTTON */}
+                </div>
+                
+                <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                  <div className="px-2 py-1 rounded bg-white/[0.02] border border-white/5 text-emerald-400 text-[10px] font-medium tracking-wider uppercase font-mono">
+                    Verified
+                  </div>
+                  
                   {c.certificateUrl ? (
                     <a
                       href={c.certificateUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#8CC63F] text-black font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-lg shadow-[#8CC63F]/20"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/5 border border-white/5 text-xs text-white font-medium hover:bg-white/10 transition"
                     >
-                      <FileBadge size={16} />
-                      View Certificate
+                      <span>Review Asset</span>
+                      <ArrowUpRight className="w-3 h-3 text-slate-400" />
                     </a>
                   ) : (
-                    <span className="text-xs text-white/20 italic">No URL available</span>
+                    <span className="text-[10px] text-slate-600 italic font-mono px-2">UNROUTED_URL</span>
                   )}
-
-                  <div className="hidden md:block px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-[#8CC63F] text-[10px] font-bold uppercase">
-                    Verified
-                  </div>
                 </div>
-
-
-               
               </div>
             </div>
           ))}
         </div>
       )}
-    </section>
+    </div>
   );
 }

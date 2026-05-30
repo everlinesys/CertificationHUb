@@ -1,5 +1,5 @@
+import { useState, useEffect } from "react"
 import { Outlet, NavLink, useNavigate } from "react-router-dom"
-import { ArrowUp } from "lucide-react"
 import {
   LayoutDashboard,
   PlusCircle,
@@ -11,547 +11,195 @@ import {
   X,
   ShieldCheck,
   Sparkles,
+  ArrowUp,
 } from "lucide-react"
-
-import { useState, useEffect } from "react"
 
 export default function AdminLayout() {
   const navigate = useNavigate()
   const [showTop, setShowTop] = useState(false)
   const [open, setOpen] = useState(false)
+
   useEffect(() => {
     const handleScroll = () => {
       setShowTop(window.scrollY > 300)
     }
-
     window.addEventListener("scroll", handleScroll)
-
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
   const logout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
-
     navigate("/login")
   }
 
-  const linkClass = ({ isActive }) =>
-    `
-      group
-      flex
-      items-center
-      gap-3
-      px-4
-      py-3
-      rounded-2xl
-      transition-all
-      duration-300
-      font-medium
-      ${isActive
-      ? "bg-[#11B5FF] text-white shadow-lg shadow-cyan-500/20"
-      : "text-[#9CB4C9] hover:bg-white/5 hover:text-white"
+  const linkClass = ({ isActive }) => `
+    group
+    flex
+    items-center
+    gap-2.5
+    px-3
+    py-2
+    rounded-lg
+    text-xs
+    font-medium
+    transition-all
+    ${isActive
+      ? "bg-white/5 text-[#11B5FF] border border-white/5 shadow-sm"
+      : "text-slate-400 hover:bg-white/[0.02] hover:text-white"
     }
-    `
+  `
 
   const navItems = (
     <>
-      <NavLink
-        to="/admin"
-        end
-        className={linkClass}
-        onClick={() => setOpen(false)}
-      >
-        <LayoutDashboard className="w-5 h-5" />
+      <NavLink to="/admin" end className={linkClass} onClick={() => setOpen(false)}>
+        <LayoutDashboard className="w-4 h-4" />
         Dashboard
       </NavLink>
-
-      <NavLink
-        to="/admin/categories"
-        className={linkClass}
-        onClick={() => setOpen(false)}
-      >
-        <CassetteTape className="w-5 h-5" />
+      <NavLink to="/admin/categories" className={linkClass} onClick={() => setOpen(false)}>
+        <CassetteTape className="w-4 h-4" />
         Categories
       </NavLink>
-
-      <NavLink
-        to="/admin/create"
-        className={linkClass}
-        onClick={() => setOpen(false)}
-      >
-        <PlusCircle className="w-5 h-5" />
+      <NavLink to="/admin/create" className={linkClass} onClick={() => setOpen(false)}>
+        <PlusCircle className="w-4 h-4" />
         Certifications
       </NavLink>
-
-      <NavLink
-        to="/admin/questions"
-        className={linkClass}
-        onClick={() => setOpen(false)}
-      >
-        <FileText className="w-5 h-5" />
+      <NavLink to="/admin/questions" className={linkClass} onClick={() => setOpen(false)}>
+        <FileText className="w-4 h-4" />
         Questions
       </NavLink>
-
-      <NavLink
-        to="/admin/users"
-        className={linkClass}
-        onClick={() => setOpen(false)}
-      >
-        <Users className="w-5 h-5" />
+      <NavLink to="/admin/users" className={linkClass} onClick={() => setOpen(false)}>
+        <Users className="w-4 h-4" />
         Users
       </NavLink>
     </>
   )
 
   return (
-    <section className="flex min-h-screen bg-gradient-to-br from-[#071D2E] via-[#102E46] to-[#0A2235] text-white overflow-hidden">
-
+    <div className="flex min-h-screen bg-zinc-950 text-slate-200 antialiased selection:bg-[#11B5FF]/30 selection:text-white">
+      
       {/* DESKTOP SIDEBAR */}
-      <aside className="
-        hidden
-        lg:flex
-        w-[290px]
-        border-r
-        border-white/10
-        bg-white/[0.03]
-        backdrop-blur-xl
-        flex-col
-        relative
-      ">
-
-        {/* Glow */}
-        <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-cyan-500/10 blur-[120px] rounded-full" />
-
-        <div className="relative z-10 flex flex-col h-full p-6">
-
-          {/* Logo */}
-          <div className="mb-10">
-
-            <div className="
-              flex
-              items-center
-              gap-3
-              rounded-3xl
-              bg-white/5
-              border
-              border-white/10
-              p-4
-            ">
-
-              <div className="
-                w-14
-                h-14
-                rounded-2xl
-                bg-[#11B5FF]/10
-                border
-                border-[#11B5FF]/20
-                flex
-                items-center
-                justify-center
-              ">
-                <ShieldCheck className="w-7 h-7 text-[#11B5FF]" />
+      <aside className="hidden lg:flex w-60 border-r border-white/5 bg-zinc-900/40 flex-col shrink-0 sticky top-0 h-screen">
+        <div className="flex flex-col h-full p-4 justify-between">
+          
+          <div className="space-y-6">
+            {/* Minimal Brand Identity Block */}
+            <div className="flex items-center gap-2.5 px-1 py-1.5">
+              <div className="w-8 h-8 rounded-lg bg-[#11B5FF]/5 border border-[#11B5FF]/20 flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-4 h-4 text-[#11B5FF]" />
               </div>
-
-              <div>
-                <h1 className="text-xl font-bold">
+              <div className="min-w-0">
+                <h1 className="text-xs font-semibold text-white tracking-tight truncate">
                   LearnBridge
                 </h1>
-
-                <p className="text-white/50 text-sm">
-                  Admin Control
+                <p className="text-slate-500 text-[10px] font-medium tracking-wide">
+                  Internal Core Platform
                 </p>
               </div>
             </div>
+
+            {/* Navigation Block */}
+            <nav className="flex flex-col gap-1">
+              <span className="text-[10px] font-semibold tracking-wider text-slate-500 uppercase px-3 mb-1">
+                Navigation Matrix
+              </span>
+              {navItems}
+            </nav>
           </div>
 
-          {/* Small Badge */}
-          <div className="
-            inline-flex
-            items-center
-            gap-2
-            px-4
-            py-2
-            rounded-full
-            bg-white/5
-            border
-            border-white/10
-            text-white/70
-            text-sm
-            mb-8
-            w-fit
-          ">
-            <Sparkles className="w-4 h-4 text-[#11B5FF]" />
-            Management Panel
-          </div>
-
-          {/* Nav */}
-          <nav className="flex flex-col gap-3">
-            {navItems}
-          </nav>
-
-          {/* Bottom */}
-          <div className="">
-
-            <div className="
-              rounded-3xl
-              bg-white/[0.04]
-              border
-              border-white/10
-              p-5
-              mb-5
-            ">
-
-              <p className="text-sm text-white/50 mb-2">
-                Platform Status
-              </p>
-
+          {/* Sidebar Footer Elements */}
+          <div className="space-y-3 pt-4 border-t border-white/[0.02]">
+            <div className="rounded-lg bg-white/[0.01] border border-white/5 p-3">
               <div className="flex items-center gap-2">
-
-                <div className="w-3 h-3 rounded-full bg-[#8CC63F] animate-pulse" />
-
-                <p className="font-semibold text-[#8CC63F]">
-                  All Systems Operational
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                </span>
+                <p className="text-[10px] font-medium text-emerald-400 font-mono tracking-tight">
+                  Node Engine Active
                 </p>
               </div>
             </div>
 
-            {/* Logout */}
             <button
               onClick={logout}
-              className="
-                w-full
-                flex
-                items-center
-                justify-center
-                gap-3
-                rounded-2xl
-                border
-                border-red-500/20
-                bg-red-500/10
-                py-4
-                text-red-300
-                hover:bg-red-500/20
-                transition-all
-              "
+              className="w-full flex items-center justify-center gap-2 rounded-lg border border-rose-500/10 bg-rose-500/5 py-2 text-xs text-rose-400 font-medium hover:bg-rose-500/10 transition"
             >
-              <LogOut className="w-5 h-5" />
-              Logout
+              <LogOut className="w-3.5 h-3.5" />
+              Terminate Session
             </button>
           </div>
+
         </div>
       </aside>
 
-      {/* MOBILE TOPBAR */}
-      <div className="
-        fixed
-        top-0
-        left-0
-        right-0
-        z-50
-        lg:hidden
-        border-b
-        border-white/10
-        bg-[#071D2E]/90
-        backdrop-blur-xl
-      ">
-
-        <div className="flex items-center justify-between px-4 py-4">
-
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-
-            <div className="
-              w-12
-              h-12
-              rounded-2xl
-              bg-[#11B5FF]/10
-              border
-              border-[#11B5FF]/20
-              flex
-              items-center
-              justify-center
-            ">
-              <ShieldCheck className="w-6 h-6 text-[#11B5FF]" />
-            </div>
-
-            <div>
-              <h1 className="font-bold text-lg">
-                Admin
-              </h1>
-
-              <p className="text-white/50 text-xs">
-                LearnBridge
-              </p>
-            </div>
+      {/* MOBILE HEADER STRIP */}
+      <div className="fixed top-0 left-0 right-0 z-40 lg:hidden border-b border-white/5 bg-zinc-950/80 backdrop-blur-md h-14 flex items-center justify-between px-4">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-md bg-[#11B5FF]/5 border border-[#11B5FF]/20 flex items-center justify-center">
+            <ShieldCheck className="w-4 h-4 text-[#11B5FF]" />
           </div>
-
-          {/* Menu */}
-          <button
-            onClick={() => setOpen(true)}
-            className="
-              w-12
-              h-12
-              rounded-2xl
-              bg-white/5
-              border
-              border-white/10
-              flex
-              items-center
-              justify-center
-            "
-          >
-            <Menu className="w-6 h-6" />
-          </button>
+          <span className="font-semibold text-xs text-white">LearnBridge Admin</span>
         </div>
+
+        <button
+          onClick={() => setOpen(true)}
+          className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-300"
+        >
+          <Menu className="w-4 h-4" />
+        </button>
       </div>
 
-      {/* MOBILE DRAWER */}
+      {/* MOBILE SEAMLESS OVERLAY DRAWER */}
       {open && (
-        <div className="
-          fixed
-          inset-0
-          z-50
-          bg-black/60
-          backdrop-blur-sm
-          lg:hidden
-        ">
-
-          <div className="
-            w-[290px]
-            h-full
-            bg-[#071D2E]
-            border-r
-            border-white/10
-            p-6
-            relative
-          ">
-
-            {/* Close */}
-            <button
-              onClick={() => setOpen(false)}
-              className="
-                absolute
-                top-5
-                right-5
-                w-10
-                h-10
-                rounded-xl
-                bg-white/5
-                border
-                border-white/10
-                flex
-                items-center
-                justify-center
-              "
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {/* Header */}
-            <div className="mb-10">
-
-              <div className="
-                flex
-                items-center
-                gap-3
-                rounded-3xl
-                bg-white/5
-                border
-                border-white/10
-                p-4
-              ">
-
-                <div className="
-                  w-14
-                  h-14
-                  rounded-2xl
-                  bg-[#11B5FF]/10
-                  border
-                  border-[#11B5FF]/20
-                  flex
-                  items-center
-                  justify-center
-                ">
-                  <ShieldCheck className="w-7 h-7 text-[#11B5FF]" />
-                </div>
-
-                <div>
-                  <h1 className="text-xl font-bold">
-                    LearnBridge
-                  </h1>
-
-                  <p className="text-white/50 text-sm">
-                    Admin Control
-                  </p>
-                </div>
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm lg:hidden">
+          <div className="w-60 h-full bg-zinc-950 border-r border-white/5 p-4 flex flex-col justify-between relative">
+            
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-semibold uppercase text-slate-500 tracking-wider">Menu Hub</span>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="w-7 h-7 rounded-md bg-white/5 border border-white/10 flex items-center justify-center"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
               </div>
+
+              <nav className="flex flex-col gap-1">
+                {navItems}
+              </nav>
             </div>
 
-            {/* Nav */}
-            <nav className="flex flex-col gap-3">
-              {navItems}
-            </nav>
-
-            {/* Logout */}
             <button
               onClick={logout}
-              className="
-                mt-10
-                w-full
-                flex
-                items-center
-                justify-center
-                gap-3
-                rounded-2xl
-                border
-                border-red-500/20
-                bg-red-500/10
-                py-4
-                text-red-300
-                hover:bg-red-500/20
-                transition-all
-              "
+              className="w-full flex items-center justify-center gap-2 rounded-lg border border-rose-500/10 bg-rose-500/5 py-2 text-xs text-rose-400 font-medium"
             >
-              <LogOut className="w-5 h-5" />
-              Logout
+              <LogOut className="w-3.5 h-3.5" />
+              Terminate Session
             </button>
+
           </div>
         </div>
       )}
 
-      {/* MAIN */}
-      <main className="
-        flex-1
-        min-w-0
-        relative
-      ">
-
-        {/* Glow */}
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cyan-500/5 blur-[140px] rounded-full pointer-events-none" />
-
-        {/* Content */}
-        <div className="
-          relative
-          z-10
-          pt-24
-          lg:pt-0
-          p-4
-          md:p-8
-          pb-28
-        ">
+      {/* CORE VIEWPORT CANVAS */}
+      <main className="flex-1 min-w-0 relative">
+        <div className="relative z-10 pt-18 lg:pt-6 p-4 md:p-6 pb-24 lg:pb-8">
           <Outlet />
         </div>
       </main>
 
-      {/* MOBILE BOTTOM NAV */}
-      <div className="
-        fixed
-        bottom-0
-        left-0
-        right-0
-        z-50
-        lg:hidden
-        border-t
-        border-white/10
-        bg-[#071D2E]/90
-        backdrop-blur-xl
-      ">
-
-        <div className="grid grid-cols-5 gap-2 p-3">
-
-          <BottomLink
-            to="/admin"
-            icon={LayoutDashboard}
-            label="Home"
-          />
-
-          <BottomLink
-            to="/admin/categories"
-            icon={CassetteTape}
-            label="Category"
-          />
-
-          <BottomLink
-            to="/admin/create"
-            icon={PlusCircle}
-            label="Create"
-          />
-
-          <BottomLink
-            to="/admin/questions"
-            icon={FileText}
-            label="Questions"
-          />
-
-          <BottomLink
-            to="/admin/users"
-            icon={Users}
-            label="Users"
-          />
-        </div>
-      </div>{/* Scroll To Top */}
+      {/* SCROLL RECOVERY RIG */}
       {showTop && (
         <button
-          onClick={() =>
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            })
-          }
-          className="
-      fixed
-      bottom-24
-      right-6
-      z-50
-      w-12
-      h-12
-      rounded-2xl
-      bg-[#11B5FF]
-      text-white
-      shadow-2xl
-      flex
-      items-center
-      justify-center
-      hover:scale-105
-      transition-all
-      duration-300
-    "
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-6 right-6 z-40 w-9 h-9 rounded-lg bg-[#11B5FF] text-white shadow-lg shadow-cyan-500/20 flex items-center justify-center hover:scale-105 transition"
         >
-          <ArrowUp className="w-5 h-5" />
+          <ArrowUp className="w-4 h-4" />
         </button>
       )}
-    </section>
-  )
-}
 
-/* Bottom Nav Item */
-function BottomLink({ to, icon: Icon, label }) {
-  return (
-    <NavLink
-      to={to}
-      end={to === "/admin"}
-      className={({ isActive }) =>
-        `
-          flex
-          flex-col
-          items-center
-          justify-center
-          gap-1
-          py-2
-          rounded-2xl
-          transition-all
-          ${isActive
-          ? "bg-[#11B5FF] text-white"
-          : "text-white/50"
-        }
-        `
-      }
-    >
-      <Icon className="w-5 h-5" />
-
-      <span className="text-[10px] font-medium">
-        {label}
-      </span>
-    </NavLink>
+    </div>
   )
 }

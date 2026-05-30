@@ -1,6 +1,7 @@
 import { useState } from "react"
 import api from "../api"
 import { useNavigate, useLocation } from "react-router-dom"
+import { GoogleLogin } from "@react-oauth/google";
 
 import {
   ShieldCheck,
@@ -83,7 +84,7 @@ export default function Login() {
   }
 
   return (
-    <section className="min-h-screen overflow-hidden bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white relative px-4 py-8 md:px-8">
+    <section className="min-h-screen overflow-hidden bg-[#001F3F]  via-[#163A57] to-[#0A2235] text-white relative px-4 py-8 md:px-8">
 
       {/* Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-cyan-500/10 blur-[140px] rounded-full" />
@@ -388,7 +389,89 @@ export default function Login() {
                     </>
                   )}
                 </button>
-              </div>
+              </div> <br />
+              <GoogleLogin
+                onSuccess={async (credentialResponse) => {
+                  try {
+                    const res = await api.post(
+                      "/auth/google-login",
+                      {
+                        token: credentialResponse.credential,
+                      }
+                    );
+
+                    const token = res.data.token;
+                    const user = res.data.user;
+
+                    localStorage.setItem("token", token);
+                    localStorage.setItem(
+                      "user",
+                      JSON.stringify(user)
+                    );
+
+                    // Admin redirect
+                    if (user.role === "ADMIN") {
+                      navigate("/admin");
+                      return;
+                    }
+
+                    // Restore pending attempt
+                    const pending =
+                      localStorage.getItem("pending_attempt");
+
+                    if (pending) {
+                      const data = JSON.parse(pending);
+
+                      try {
+                        await api.post(
+                          "/attempt/submit",
+                          {
+                            certificationId: data.cert.id,
+                            answers: data.answers,
+                          },
+                          {
+                            headers: {
+                              Authorization: `Bearer ${token}`,
+                            },
+                          }
+                        );
+
+                        localStorage.removeItem(
+                          "pending_attempt"
+                        );
+
+                        navigate("/result", {
+                          state: data,
+                        });
+
+                        return;
+                      } catch (err) {
+                        console.error(
+                          "Failed to sync attempt:",
+                          err
+                        );
+                      }
+                    }
+
+                    if (location.state) {
+                      navigate("/result", {
+                        state: location.state,
+                      });
+                      return;
+                    }
+
+                    navigate("/dashboard");
+                  } catch (err) {
+                    alert(
+                      err.response?.data?.message ||
+                      "Google login failed"
+                    );
+                  }
+                }}
+                onError={() => {
+                  alert("Google login failed");
+                }}
+              />
               <div className="text-right">
                 <span
                   onClick={() =>

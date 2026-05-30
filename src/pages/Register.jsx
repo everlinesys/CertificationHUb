@@ -1,6 +1,7 @@
 import { useState } from "react"
 import api from "../api"
 import { useNavigate, useLocation } from "react-router-dom"
+import { GoogleLogin } from "@react-oauth/google";
 
 import {
   ShieldCheck,
@@ -93,7 +94,7 @@ export default function Register() {
   }
 
   return (
-    <section className="min-h-screen overflow-hidden bg-gradient-to-br from-[#0B2A42] via-[#163A57] to-[#0A2235] text-white relative px-4 py-8 md:px-8">
+    <section className="min-h-screen overflow-hidden bg-[#001F3F]  via-[#163A57] to-[#0A2235] text-white relative px-4 py-8 md:px-8">
 
       {/* Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-cyan-500/10 blur-[140px] rounded-full" />
@@ -438,8 +439,14 @@ export default function Register() {
                     </>
                   )}
                 </button>
-              </div>
-
+              </div> <br /> <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse.credential);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
               {/* Bottom */}
               <div className="
                 mt-8
