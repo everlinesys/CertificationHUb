@@ -2,11 +2,13 @@ import Button from "../ui/Button"
 import { useNavigate } from "react-router-dom"
 import { ArrowRight, Sparkles, BadgeCheck } from "lucide-react"
 import Header from "../layout/Header"
+import Trial from "../Due"
 
 export default function Hero() {
   const navigate = useNavigate()
 
   return (<div className="bg-[#001F3F] md:px-16">
+    <Trial/>
     <div className=" md:flex fixed top-0 left-0 w-full z-50">
       <Header />
     </div>
